@@ -25,8 +25,8 @@ export const tasksProperties = [
     DisplayOrder: 2,
     DisplayName: "Done",
     Type: "checkbox",
-    ForForm: true,
-    ForTable: false
+    ForForm: false,
+    ForTable: true
   },
   {
     Key: "Title",

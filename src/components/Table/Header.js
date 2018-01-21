@@ -9,7 +9,13 @@ class Header extends React.Component {
       <thead>
         <tr>
           {
-            columns.map(column => <th key={column.Key}>{column.DisplayName}</th>)
+            columns.map(column => 
+              <th key={column.Key}>
+                {column.DisplayName}
+                <span className="css-sort-asc"/>
+                <span className="css-sort-desc"/>
+              </th>
+            )
           }
         </tr>
       </thead>
