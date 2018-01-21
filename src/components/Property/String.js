@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class String extends React.Component {
   render() {
@@ -7,6 +8,14 @@ class String extends React.Component {
       ? value
       : <input placeholder={property.DisplayName} />
   };
+};
+
+String.propTypes = {
+  isReadonly: PropTypes.bool,
+  value: PropTypes.string,
+  prop: PropTypes.shape({
+    DisplayName: PropTypes.string
+  })
 };
 
 export default String;

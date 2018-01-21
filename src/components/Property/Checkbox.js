@@ -1,29 +1,28 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Checkbox extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      isChecked: props.value || false
-    };
-  }
-
-  handleChange = (event) => {
-    const target = event.target;
-    const value = target.checked;
-    this.setState({isChecked: value});
-  }
-
   render() {
-    const {isReadonly = false, property = {}} = this.props;
-    const {isChecked} = this.state;
+    const {isReadonly = false, property = {}, value = false} = this.props;
     return (
       <label>
-        <input type="checkbox" checked={isChecked} onChange={this.handleChange} disabled={isReadonly} />
+        <input type="checkbox" checked={value} disabled={isReadonly} />
         {property.ShouldDisplayLabel && property.DisplayName}
       </label>
     );
   };
+};
+
+Checkbox.propTypes = {
+  isReadonly: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool
+  ]),
+  property: PropTypes.shape({
+    ShouldDisplayLabel: PropTypes.bool,
+    DisplayName: PropTypes.string
+  })
 };
 
 export default Checkbox;

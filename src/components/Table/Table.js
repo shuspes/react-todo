@@ -1,18 +1,23 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import "./Table.css";
 import Header from "./Header";
 import Body from "./Body";
 
-class Table extends React.Component {
+export class Table extends React.Component {
   render() {
-    const {columns = [], rows = [], isReadonly = false, editableColumns = []} = this.props;
+    const {columns = [], rows = [], editableColumns = []} = this.props;
     return (
       <table className="css-table">
         <Header columns={columns} />
-        <Body columns={columns} rows={rows} isReadonly={isReadonly} editableColumns={editableColumns} />
+        <Body columns={columns} rows={rows} editableColumns={editableColumns} />
       </table>
     );
   };
 };
 
-export default Table;
+Table.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.object),
+  rows: PropTypes.arrayOf(PropTypes.object),
+  editableColumns: PropTypes.arrayOf(PropTypes.string)
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Combo extends React.Component {
   getValue() {
@@ -26,7 +27,7 @@ class Combo extends React.Component {
     return isReadonly
     ? (<span>{this.getDisplayValue()}</span>)
     : (
-      <select value={this.getValue()} onChange={() => {}}>
+      <select defaultValue={this.getValue()}>
         {
           possibleValues.map(it => (<option key={it.Key} value={it.Key}>{it.DisplayName}</option>))
         }
@@ -34,6 +35,17 @@ class Combo extends React.Component {
       </select>
     );
   };
+};
+
+Combo.propTypes = {
+  property: PropTypes.shape({
+    PossibleValues: PropTypes.arrayOf(PropTypes.shape({
+      Key: PropTypes.string,
+      DisplayName: PropTypes.string
+    }))
+  }),
+  value: PropTypes.string,
+  isReadonly: PropTypes.bool
 };
 
 export default Combo;

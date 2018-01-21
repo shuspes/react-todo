@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Date extends React.Component {
   render() {
@@ -6,9 +7,14 @@ class Date extends React.Component {
     return isReadonly
     ? value
     : (
-      <input type="date" value={value} onChange={() => {}} />
+      <input type="date" value={value} />
     );
   };
+};
+
+Date.propTypes = {
+  isReadonly: PropTypes.bool,
+  value: PropTypes.string
 };
 
 export default Date;

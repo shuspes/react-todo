@@ -1,7 +1,8 @@
 import React from "react";
-import Form from "../Form";
+import PropTypes from "prop-types";
+import { Form } from "../Form";
 
-class FilterForm extends React.Component {
+export class FilterForm extends React.Component {
   render() {
     const {properties = [], formName = ""} = this.props;
     return (
@@ -10,4 +11,7 @@ class FilterForm extends React.Component {
   };
 };
 
-export default FilterForm;
+FilterForm.propTypes = {
+  properties: PropTypes.array,
+  formName: PropTypes.string
+};
