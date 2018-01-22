@@ -1,21 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "./App.css";
-import { filterProperties, tasksProperties, tasksList } from "./appData";
+import { getAppSettings, getTasks } from "../../utils/apiWrapper";
 import { Table } from "../../components/Table";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
 
 export class App extends React.Component {
-  static defaultProps = {
-    filterProperties,
-    tasksProperties,
-    tasksList
+  state = {
+    filterFormProp: [],
+    tasksProperties: [],
+    tasksList: []
   };
 
+  componentWillMount() {
+    getAppSettings().then(({filterProperties, tasksProperties}) => {
+      return this.setState({
+        filterFormProp: filterProperties, 
+        tasksProperties: tasksProperties
+      });
+    }).then(getTasks).then(tasksList => this.setState({tasksList}));
+  }
+
   render() {
-    const {filterProperties = [], tasksProperties = [], tasksList = []} = this.props;
-    const filterFormProp = filterProperties;
+    const {filterFormProp = [], tasksProperties = [], tasksList = []} = this.state;
     const addFormProp = tasksProperties.filter(it => it.ForForm);
     const tableColumns = tasksProperties.filter(it => it.ForTable);
 
@@ -28,9 +36,3 @@ export class App extends React.Component {
     );
   }
 };
-
-App.propTypes = {
-  filterProperties: PropTypes.array,
-  tasksProperties: PropTypes.array,
-  tasksList: PropTypes.array
-}; 

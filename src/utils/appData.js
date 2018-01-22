@@ -11,6 +11,11 @@ propertyTemplate = {
 }
 */
 
+export const createGuid = _ => {
+  const S4 = _ => (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+  return (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
+}
+
 export const tasksProperties = [
   {
     Key: "Id", 
@@ -81,7 +86,7 @@ export const tasksProperties = [
 
 export const tasksList = [
   {
-    Id: "1",
+    Id: createGuid(),
     IsComplete: true,
     Title: "Create todo app",
     Description: "Use create-react-app npm package",
@@ -89,7 +94,7 @@ export const tasksList = [
     Date: "2018-01-18"
   },
   {
-    Id: "2",
+    Id: createGuid(),
     IsComplete: false,
     Title: "Create components",
     Description: "Create table and form",
@@ -97,7 +102,7 @@ export const tasksList = [
     Date: "2018-01-19"
   },
   {
-    Id: "3",
+    Id: createGuid(),
     IsComplete: false,
     Title: "Create components v2",
     Description: "Create filter",
@@ -105,7 +110,7 @@ export const tasksList = [
     Date: "2018-01-19"
   },
   {
-    Id: "4",
+    Id: createGuid(),
     IsComplete: true,
     Title: "Create todo repository",
     Description: "",
@@ -113,7 +118,7 @@ export const tasksList = [
     Date: "2018-01-17"
   },
   {
-    Id: "5",
+    Id: createGuid(),
     IsComplete: false,
     Title: "Complete todo app",
     Description: "",
