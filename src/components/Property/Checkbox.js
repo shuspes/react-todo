@@ -2,11 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Checkbox extends React.Component {
+  state = {
+    value: Boolean(this.props.value)
+  };
+
+  handleChange = ev => {
+    this.setState({value: ev.target.checked});
+  };
+
   render() {
-    const {isReadonly = false, property = {}, value = false, className = ""} = this.props;
+    const {isReadonly = false, property = {}, className = ""} = this.props;
+    const {value = false} = this.state;
     return (
       <label className={className + " css-property"}>
-        <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} />
+        <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
         {property.ShouldDisplayLabel && property.DisplayName}
       </label>
     );

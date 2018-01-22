@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import "./App.css";
 import { getAppSettings, getTasks } from "../../utils/apiWrapper";
 import { Table } from "../../components/Table";
@@ -29,7 +28,7 @@ export class App extends React.Component {
 
     return (
       <div className="css-todoApp">
-        <CreateForm properties={addFormProp} formName="Add Task" buttonName="Add" />        
+        <CreateForm properties={addFormProp} formName="Add Task" buttonName="Add"  />        
         <FilterForm properties={filterFormProp} formName="Filter" />
         <Table columns={tableColumns} rows={tasksList} editableColumns={["IsComplete"]} />
       </div>
