@@ -4,9 +4,9 @@ import { Form } from "../Form";
 
 export class CreateForm extends React.Component {
   render() {
-    const {properties = [], formName = "", buttonName = ""} = this.props;
+    const {properties = [], formName = "", buttonName = "", addTask} = this.props;
     return (
-      <Form properties={properties} formName={formName} buttonName={buttonName} />
+      <Form properties={properties} formName={formName} buttonName={buttonName} handleSubmit={addTask} />
     );
   };
 };
@@ -14,5 +14,6 @@ export class CreateForm extends React.Component {
 CreateForm.propTypes = {
   properties: PropTypes.array,
   formName: PropTypes.string,
-  buttonName: PropTypes.string
+  buttonName: PropTypes.string,
+  addTask: PropTypes.func
 };
