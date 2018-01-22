@@ -48,8 +48,8 @@ export const tasksProperties = [
     Type: "combo",
     PossibleValues: [
       {
-        Key: "High",
-        DisplayName: "High",
+        Key: "Low",
+        DisplayName: "Low",
         DisplayOrder: 1
       },
       {
@@ -58,8 +58,8 @@ export const tasksProperties = [
         DisplayOrder: 2
       },
       {
-        Key: "Low",
-        DisplayName: "Low",
+        Key: "High",
+        DisplayName: "High",
         DisplayOrder: 3
       }
     ],
