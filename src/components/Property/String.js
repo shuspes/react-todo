@@ -18,6 +18,7 @@ class String extends React.Component {
       : <input placeholder={property.DisplayName} 
                 value={value} 
                 className={"css-property " + className} 
+                name={property.Key}
                 onChange={this.handleChange} />
   };
 };
@@ -26,7 +27,8 @@ String.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.string,
   prop: PropTypes.shape({
-    DisplayName: PropTypes.string
+    DisplayName: PropTypes.string,
+    Key: PropTypes.string
   }),
   className: PropTypes.string
 };

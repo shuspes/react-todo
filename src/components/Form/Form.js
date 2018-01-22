@@ -4,10 +4,21 @@ import "./Form.css";
 import { Property } from "../Property";
 
 export class Form extends React.Component {
+  onSubmit = ev => {
+    ev.preventDefault();
+    const obj = [...ev.target.querySelectorAll("[name]")].reduce((result, item) => {
+      return {
+        ...result,
+        [item.getAttribute("name")]: item.value
+      }
+    }, {});
+    if(this.props.handleSubmit) this.props.handleSubmit(obj);
+  };
+
   render() {
     const {properties = [], formName = "", buttonName = ""} = this.props;
     return (
-      <div className="css-form">
+      <form className="css-form" onSubmit={this.onSubmit}>
         <div className="css-form-name">
           {formName}
         </div>
@@ -17,15 +28,18 @@ export class Form extends React.Component {
           }
         </div>
         {
-          buttonName !== "" && (<button>{buttonName}</button>)
+          buttonName !== "" && (<input type="submit" value={buttonName} />)
         }
-      </div>
+      </form>
     );
   };
 };
 
 Form.propTypes ={
-  properties: PropTypes.array,
+  properties: PropTypes.arrayOf(PropTypes.shape({
+    Key: PropTypes.string
+  })),
   formName: PropTypes.string,
-  buttonName: PropTypes.string
+  buttonName: PropTypes.string,
+  handleSubmit: PropTypes.func
 };

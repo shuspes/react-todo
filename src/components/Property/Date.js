@@ -11,12 +11,16 @@ class Date extends React.Component {
   };
 
   render() {
-    const {className = "", isReadonly = false} = this.props;    
+    const {className = "", isReadonly = false, property = {}} = this.props;    
     const {value = ""} = this.state;
     return isReadonly
     ? value
     : (
-      <input className={className + " css-property"} type="date" value={value} onChange={this.handleChange} />
+      <input className={className + " css-property"} 
+              type="date" 
+              value={value} 
+              name={property.Key}
+              onChange={this.handleChange} />
     );
   };
 };
@@ -24,7 +28,10 @@ class Date extends React.Component {
 Date.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  property: PropTypes.shape({
+    Key: PropTypes.string
+  })
 };
 
 export default Date;

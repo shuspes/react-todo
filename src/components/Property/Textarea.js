@@ -19,6 +19,7 @@ class Textarea extends React.Component {
       : <textarea className={className + " css-property"} 
                   placeholder={property.DisplayName} 
                   value={value} 
+                  name={property.Key}
                   onChange={this.handleChange}
                   cols="100" rows="4"></textarea>
   };
@@ -28,7 +29,8 @@ Textarea.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.string,
   prop: PropTypes.shape({
-    DisplayName: PropTypes.string
+    DisplayName: PropTypes.string,
+    Key: PropTypes.string
   }),
   className: PropTypes.string
 };

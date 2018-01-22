@@ -15,7 +15,7 @@ class Checkbox extends React.Component {
     const {value = false} = this.state;
     return (
       <label className={className + " css-property"}>
-        <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
+        <input name={property.Key} className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
         {property.ShouldDisplayLabel && property.DisplayName}
       </label>
     );
@@ -29,6 +29,7 @@ Checkbox.propTypes = {
     PropTypes.bool
   ]),
   property: PropTypes.shape({
+    Key: PropTypes.string,
     ShouldDisplayLabel: PropTypes.bool,
     DisplayName: PropTypes.string
   }),
