@@ -8,7 +8,7 @@ class Cell extends React.Component {
 
     return (
       <td>
-        <Property value={value} property={column} isReadonly={!editableColumns.includes(column.Key)} />
+        <Property className="css-property-table" value={value} property={column} isReadonly={!editableColumns.includes(column.Key)} />
       </td>
     );
   }

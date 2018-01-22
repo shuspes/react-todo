@@ -21,17 +21,16 @@ class Combo extends React.Component {
   }
 
   render() {
-    const {isReadonly = false, property = {}} = this.props;
+    const {isReadonly = false, property = {}, className = ""} = this.props;
     const {PossibleValues: possibleValues = []} = property;
 
     return isReadonly
     ? (<span>{this.getDisplayValue()}</span>)
     : (
-      <select defaultValue={this.getValue()}>
+      <select className={className + " css-property"} defaultValue={this.getValue()}>
         {
           possibleValues.map(it => (<option key={it.Key} value={it.Key}>{it.DisplayName}</option>))
         }
-        <option></option>
       </select>
     );
   };
@@ -45,7 +44,8 @@ Combo.propTypes = {
     }))
   }),
   value: PropTypes.string,
-  isReadonly: PropTypes.bool
+  isReadonly: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default Combo;

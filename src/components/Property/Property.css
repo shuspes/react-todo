@@ -1,0 +1,19 @@
+.css-longString {
+  width: 620px;
+}
+
+textarea {
+  resize: none;
+}
+
+.css-property {
+  margin: 5px;
+}
+
+.css-checkbox {
+  margin-right: 5px;
+}
+
+.css-property-table {
+  margin: 0;
+}

@@ -146,6 +146,6 @@ export const filterProperties = [
     Key: "Search",
     DisplayOrder: 4,
     DisplayName: "Text search (title + description)",
-    Type: "string"
+    Type: "longString"
   }
 ];

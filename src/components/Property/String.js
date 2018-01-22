@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 class String extends React.Component {
   render() {
-    const {isReadonly = false, property = {}, value = ""} = this.props;
+    const {isReadonly = false, property = {}, value = "", className = ""} = this.props;
     return isReadonly
       ? value
-      : <input placeholder={property.DisplayName} />
+      : <input placeholder={property.DisplayName} value={value} className={"css-property " + className} />
   };
 };
 
@@ -15,7 +15,8 @@ String.propTypes = {
   value: PropTypes.string,
   prop: PropTypes.shape({
     DisplayName: PropTypes.string
-  })
+  }),
+  className: PropTypes.string
 };
 
 export default String;

@@ -3,18 +3,19 @@ import PropTypes from "prop-types";
 
 class Date extends React.Component {
   render() {
-    const {value = "", isReadonly = false} = this.props;    
+    const {className = "", value = "", isReadonly = false} = this.props;    
     return isReadonly
     ? value
     : (
-      <input type="date" value={value} />
+      <input className={className + " css-property"} type="date" value={value} />
     );
   };
 };
 
 Date.propTypes = {
   isReadonly: PropTypes.bool,
-  value: PropTypes.string
+  value: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Date;
