@@ -16,24 +16,25 @@ export class Property extends React.Component {
       property: {
         Type
       },
-      className = ""
+      className = "",
+      onChangeProperty
     } = this.props;
     
     switch (Type) {
       case "string":
-        return <String className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "combo":
-        return <Combo className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Combo onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "checkbox":
-        return <Checkbox className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Checkbox onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "date":
-        return <Date className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Date onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "textarea":
-        return <Textarea className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Textarea onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "longString":
-        return <String property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
+        return <String onChange={onChangeProperty} property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
       default:
-        return <String className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
     };
   };
 };
@@ -47,5 +48,6 @@ Property.propTypes = {
   property: PropTypes.shape({
     Type: PropTypes.string
   }).isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onChangeProperty: PropTypes.func
 };

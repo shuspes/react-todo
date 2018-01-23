@@ -4,33 +4,48 @@ import "./Form.css";
 import { Property } from "../Property";
 
 export class Form extends React.Component {
-  onSubmit = ev => {
-    ev.preventDefault();
-    const obj = [...ev.target.querySelectorAll("[name]")].reduce((result, item) => {
-      return {
-        ...result,
-        [item.getAttribute("name")]: item.value
-      }
-    }, {});
-    if(this.props.handleSubmit) this.props.handleSubmit(obj);
+  constructor(props) {
+    super(props);
+    this.state = {
+      changeSet: this.getDefultChangeSet(props)
+    };
+  }
+
+  getDefultChangeSet = props => {
+    return props.properties.reduce((set, property) => ({...set, [property.Key]: ""}), {});
+  };
+
+  handleChangeProperty = (propertyKey, value) => {    
+    this.setState({changeSet: {...this.state.changeSet, [propertyKey]: value}});
+  };
+
+  handlrForm = _ => {
+    if(this.props.handleSubmit) this.props.handleSubmit(this.state.changeSet);
+    this.setState({changeSet: this.getDefultChangeSet(this.props)});
   };
 
   render() {
     const {properties = [], formName = "", buttonName = ""} = this.props;
+    const {changeSet = {}} = this.state;
     return (
-      <form className="css-form" onSubmit={this.onSubmit}>
+      <div className="css-form">
         <div className="css-form-name">
           {formName}
         </div>
         <div>
           {
-            properties.map(property => <Property key={property.Key} property={property} />)
+            properties.map(property => 
+                <Property key={property.Key} 
+                          property={property} 
+                          value={changeSet[property.Key] || ""}
+                          onChangeProperty={this.handleChangeProperty.bind(this, property.Key)} />
+            )
           }
         </div>
         {
-          buttonName !== "" && (<input type="submit" value={buttonName} />)
+          buttonName !== "" && (<button onClick={this.handlrForm}>{buttonName}</button>)
         }
-      </form>
+      </div>
     );
   };
 };

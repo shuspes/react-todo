@@ -20,6 +20,10 @@ class Combo extends React.Component {
     return currentValue ? currentValue.DisplayName : "";    
   }
 
+  handleChange = ev => {
+    if(this.props.onChange) this.props.onChange(ev.target.value);
+  };
+
   render() {
     const {isReadonly = false, property = {}, className = ""} = this.props;
     const {PossibleValues: possibleValues = []} = property;
@@ -27,7 +31,7 @@ class Combo extends React.Component {
     return isReadonly
     ? (<span>{this.getDisplayValue()}</span>)
     : (
-      <select className={className + " css-property"} defaultValue={this.getValue()} name={property.Key}>
+      <select className={className + " css-property"} value={this.getValue()} onChange={this.handleChange}>
         {
           possibleValues.map(it => (<option key={it.Key} value={it.Key}>{it.DisplayName}</option>))
         }
@@ -38,7 +42,6 @@ class Combo extends React.Component {
 
 Combo.propTypes = {
   property: PropTypes.shape({
-    Key: PropTypes.string,
     PossibleValues: PropTypes.arrayOf(PropTypes.shape({
       Key: PropTypes.string,
       DisplayName: PropTypes.string
@@ -46,7 +49,8 @@ Combo.propTypes = {
   }),
   value: PropTypes.string,
   isReadonly: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default Combo;

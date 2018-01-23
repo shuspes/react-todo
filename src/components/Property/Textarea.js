@@ -2,24 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Textarea extends React.Component {
-  state = {
-    value: this.props.value || ""
-  };
-
   handleChange = ev => {
-    this.setState({value: ev.target.value});
+    if(this.props.onChange) this.props.onChange(ev.target.value);  
   };
 
   render() {
-    const {className = "", isReadonly = false, property = {}} = this.props;
-    const {value = ""} = this.state;
-    
+    const {className = "", isReadonly = false, property = {}, value = ""} = this.props;    
     return isReadonly
       ? value
       : <textarea className={className + " css-property"} 
                   placeholder={property.DisplayName} 
                   value={value} 
-                  name={property.Key}
                   onChange={this.handleChange}
                   cols="100" rows="4"></textarea>
   };
@@ -29,10 +22,10 @@ Textarea.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.string,
   prop: PropTypes.shape({
-    DisplayName: PropTypes.string,
-    Key: PropTypes.string
+    DisplayName: PropTypes.string
   }),
-  className: PropTypes.string
+  className: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default Textarea;
