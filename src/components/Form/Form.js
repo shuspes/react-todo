@@ -11,8 +11,20 @@ export class Form extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0)
+      this.setState({changeSet: this.getDefultChangeSet(nextProps)});
+  }
+
   getDefultChangeSet = props => {
-    return props.properties.reduce((set, property) => ({...set, [property.Key]: ""}), {});
+    return props.properties.reduce((set, property) => {
+      let value = "";
+      if(property.Type === "combo") {
+        const firstPossibleValue = (property.PossibleValues || [])[0] || {};
+        value = firstPossibleValue.Key || "";
+      }
+      return {...set, [property.Key]: value};
+    }, {});
   };
 
   handleChangeProperty = (propertyKey, value) => {    
@@ -52,7 +64,8 @@ export class Form extends React.Component {
 
 Form.propTypes ={
   properties: PropTypes.arrayOf(PropTypes.shape({
-    Key: PropTypes.string
+    Key: PropTypes.string,
+    Type: PropTypes.string,
   })),
   formName: PropTypes.string,
   buttonName: PropTypes.string,
