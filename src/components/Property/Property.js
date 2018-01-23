@@ -6,6 +6,7 @@ import Combo from "./Combo";
 import Checkbox from "./Checkbox";
 import Date from "./Date";
 import Textarea from "./Textarea";
+import Button from './Button';
 
 export class Property extends React.Component {
   render() {
@@ -33,6 +34,8 @@ export class Property extends React.Component {
         return <Textarea onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "longString":
         return <String onChange={onChangeProperty} property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
+      case "button":
+        return <Button onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} />;
       default:
         return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
     };
