@@ -12,15 +12,20 @@ try {
 
 tasksList = Array.isArray(tasksList) ? tasksList : stubTasksList;
 
-const saveTask = _ => localStorage.setItem(storageTaskListKey, JSON.stringify(tasksList));
+const saveTasks = _ => localStorage.setItem(storageTaskListKey, JSON.stringify(tasksList));
 
 export const addTask = task => {
   tasksList.push(task);
-  saveTask();
+  saveTasks();
   return new Promise(resolve => setTimeout(resolve, 0, tasksList));
 }
 
 export const getAppSettings = () => new Promise(resolve => setTimeout(resolve, 0, ({filterProperties, tasksProperties})));
 
-export const getTasks = _ => new Promise(resolve => 
-  setTimeout(resolve, 0, tasksList));
+export const getTasks = _ => new Promise(resolve => setTimeout(resolve, 0, tasksList));
+
+export const removeTask = taskId => {
+  tasksList = tasksList.filter(it => it.Id !== taskId); 
+  saveTasks();  
+  return new Promise((resolve, reject) => setTimeout(resolve, 0, taskId));
+};
