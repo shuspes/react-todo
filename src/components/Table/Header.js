@@ -12,8 +12,15 @@ class Header extends React.Component {
             columns.map(column => 
               <th key={column.Key}>
                 {column.DisplayName}
-                <span className="css-sort-asc"/>
-                <span className="css-sort-desc"/>
+                {
+                  (column.IsSortable == null || column.IsSortable) &&
+                        (
+                          <div>
+                            <span className="css-sort-asc"/>
+                            <span className="css-sort-desc"/>
+                          </div>
+                        )
+                }
               </th>
             )
           }
@@ -26,7 +33,8 @@ class Header extends React.Component {
 Header.propTypes = {
   column: PropTypes.arrayOf(PropTypes.shape({
     Key: PropTypes.string,
-    DisplayName: PropTypes.string
+    DisplayName: PropTypes.string,
+    IsSortable: PropTypes.bool
   }))
 };
 

@@ -3,11 +3,12 @@ propertyTemplate = {
   Key,
   DisplayOrder,  
   DisplayName,
-  Type, (checkbox|string|combo|date|textarea)
+  Type, (checkbox|string|combo|date|textarea|button)
   PossibleValues, (for combo, [] by default)
   ForForm, (add task, edit task)
   ForTable,
   ShouldDisplayLabel, (false by default)
+  IsSortable
 }
 */
 

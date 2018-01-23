@@ -5,12 +5,27 @@ import Header from "./Header";
 import Body from "./Body";
 
 export class Table extends React.Component {
+  getRemoveProperty = _ => ({
+    Key: "Remove",
+    DisplayOrder: 10000,  
+    DisplayName: "Remove",
+    Type: "button",
+    IsSortable: false
+  });
+
+  handleCellClick = (rowId, propertyKey, value) => {
+    if(this.props.cellClick) this.props.cellClick(rowId, propertyKey, value);
+  };
+
   render() {
-    const {columns = [], rows = [], editableColumns = []} = this.props;
+    const {columns = [], rows = [], editableColumns = [], hasRemoveAction = false} = this.props;
+    const tableColumns = hasRemoveAction ? [...columns, this.getRemoveProperty()] : columns;
+    const tableEditableColumns = hasRemoveAction ? [...editableColumns, "Remove"] : editableColumns;
+
     return (
       <table className="css-table">
-        <Header columns={columns} />
-        <Body columns={columns} rows={rows} editableColumns={editableColumns} />
+        <Header columns={tableColumns} />
+        <Body columns={tableColumns} rows={rows} editableColumns={tableEditableColumns} cellClick={this.handleCellClick} />
       </table>
     );
   };
@@ -19,5 +34,7 @@ export class Table extends React.Component {
 Table.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   rows: PropTypes.arrayOf(PropTypes.object),
-  editableColumns: PropTypes.arrayOf(PropTypes.string)
+  editableColumns: PropTypes.arrayOf(PropTypes.string),
+  hasRemoveAction: PropTypes.bool,
+  cellClick: PropTypes.func
 };

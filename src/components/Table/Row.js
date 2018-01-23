@@ -4,12 +4,18 @@ import Cell from "./Cell";
 
 class Row extends React.Component {
   render() {
-    const {columns = [], row = {}, editableColumns = []} = this.props; 
+    const {columns = [], row = {}, editableColumns = [], cellClick} = this.props; 
 
     return (
       <tr>
         {
-          columns.map(column => <Cell key={column.Key} value={row[column.Key]} column={column} editableColumns={editableColumns} />)
+          columns.map(column => 
+              <Cell key={column.Key} 
+                    value={row[column.Key]} 
+                    column={column} 
+                    editableColumns={editableColumns}
+                    cellClick={cellClick.bind(null, row.Id)} />
+          )
         }
       </tr>
     );
@@ -19,7 +25,8 @@ class Row extends React.Component {
 Row.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   editableColumns: PropTypes.arrayOf(PropTypes.string),
-  row: PropTypes.object
+  row: PropTypes.object,
+  cellClick: PropTypes.func
 };
 
 export default Row;

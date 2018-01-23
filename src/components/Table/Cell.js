@@ -4,11 +4,15 @@ import { Property } from "../Property";
 
 class Cell extends React.Component {
   render() {
-    const {column = {}, value = "", editableColumns = []} = this.props; 
+    const {column = {}, value = "", editableColumns = [], cellClick} = this.props; 
 
     return (
       <td>
-        <Property className="css-property-table" value={value} property={column} isReadonly={!editableColumns.includes(column.Key)} />
+        <Property className="css-property-table" 
+                  value={value} 
+                  property={column} 
+                  isReadonly={!editableColumns.includes(column.Key)}
+                  onChangeProperty={cellClick.bind(null, column.Key)} />
       </td>
     );
   }
@@ -20,7 +24,8 @@ Cell.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  editableColumns: PropTypes.arrayOf(PropTypes.string)
+  editableColumns: PropTypes.arrayOf(PropTypes.string),
+  cellClick: PropTypes.func
 };
 
 export default Cell;
