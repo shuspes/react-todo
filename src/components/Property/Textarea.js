@@ -13,8 +13,7 @@ class Textarea extends React.Component {
       : <textarea className={className + " css-property"} 
                   placeholder={property.DisplayName} 
                   value={value} 
-                  onChange={this.handleChange}
-                  cols="100" rows="4"></textarea>
+                  onChange={this.handleChange}></textarea>
   };
 };
 
