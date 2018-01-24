@@ -137,20 +137,14 @@ export const filterProperties = [
     ShouldDisplayLabel: true
   },
   {
-    Key: "DateFrom",
+    Key: "DateRange",
     DisplayOrder: 2,
-    DisplayName: "Date from",
-    Type: "date"
-  },
-  {
-    Key: "DateTo",
-    DisplayOrder: 3,
-    DisplayName: "Date to",
-    Type: "date"
+    DisplayName: "Date",
+    Type: "dateRange"
   },
   {
     Key: "Search",
-    DisplayOrder: 4,
+    DisplayOrder: 3,
     DisplayName: "Text search (title + description)",
     Type: "longString"
   }

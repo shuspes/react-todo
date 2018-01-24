@@ -22,6 +22,8 @@ export class Form extends React.Component {
       if(property.Type === "combo") {
         const firstPossibleValue = (property.PossibleValues || [])[0] || {};
         value = firstPossibleValue.Key || "";
+      } else if(property.Type === "dateRange") {
+        value = ["", ""];
       }
       return {...set, [property.Key]: value};
     }, {});

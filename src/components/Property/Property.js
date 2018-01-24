@@ -7,12 +7,13 @@ import Checkbox from "./Checkbox";
 import Date from "./Date";
 import Textarea from "./Textarea";
 import Button from './Button';
+import DateRange from './DateRange';
 
 export class Property extends React.Component {
   render() {
     const {
       isReadonly = false,
-      value = "",
+      value,
       property,
       property: {
         Type
@@ -36,6 +37,8 @@ export class Property extends React.Component {
         return <String onChange={onChangeProperty} property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
       case "button":
         return <Button onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} />;
+      case "dateRange":
+        return <DateRange onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} value={value} />;        
       default:
         return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
     };
@@ -46,7 +49,8 @@ Property.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.bool
+    PropTypes.bool,
+    PropTypes.arrayOf(PropTypes.string)
   ]),
   property: PropTypes.shape({
     Type: PropTypes.string
