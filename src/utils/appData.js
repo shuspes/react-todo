@@ -8,7 +8,9 @@ propertyTemplate = {
   ForForm, (add task, edit task)
   ForTable,
   ShouldDisplayLabel, (false by default)
-  IsSortable
+  IsSortable,
+  dependentProperty, (array|string)
+  ShouldIgnoreByValue
 }
 */
 
@@ -130,22 +132,26 @@ export const tasksList = [
 
 export const filterProperties = [
   {
-    Key: "IsComplete",
+    Key: "ShowCompleted",
     DisplayOrder: 1,
     DisplayName: "Show completed",
     Type: "checkbox",
-    ShouldDisplayLabel: true
+    ShouldDisplayLabel: true,
+    DependentProperty: "IsComplete",
+    ShouldIgnoreByValue: true
   },
   {
     Key: "DateRange",
     DisplayOrder: 2,
     DisplayName: "Date",
-    Type: "dateRange"
+    Type: "dateRange",
+    DependentProperty: "Date"
   },
   {
     Key: "Search",
     DisplayOrder: 3,
     DisplayName: "Text search (title + description)",
-    Type: "longString"
+    Type: "longString",
+    DependentProperty: ["Title", "Description"]
   }
 ];

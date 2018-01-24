@@ -1,6 +1,7 @@
 import React from 'react';
 import "./App.css";
 import { getAppSettings, getTasks, addTask, removeTask } from "../../utils/apiWrapper";
+import filterFunc from "../../utils/filter";
 import { Table } from "../../components/Table";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
@@ -10,7 +11,8 @@ export class App extends React.Component {
   state = {
     filterFormProp: [],
     tasksProperties: [],
-    tasksList: []
+    tasksList: [],
+    filterObject: {}
   };
 
   componentWillMount() {
@@ -50,16 +52,17 @@ export class App extends React.Component {
   };
 
   render() {
-    const {filterFormProp = [], tasksProperties = [], tasksList = []} = this.state;
+    const {filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}} = this.state;
     const addFormProp = tasksProperties.filter(it => it.ForForm);
     const tableColumns = tasksProperties.filter(it => it.ForTable);
+    const filteredList = filterFunc(tasksList, filterFormProp, filterObject);    
 
     return (
       <div className="css-todoApp">
         <CreateForm properties={addFormProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        
-        <FilterForm properties={filterFormProp} formName="Filter" />
+        <FilterForm properties={filterFormProp} formName="Filter" filterChanged={filterObject => this.setState({filterObject})} />
         <Table columns={tableColumns} 
-                rows={tasksList} 
+                rows={filteredList} 
                 editableColumns={["IsComplete"]} 
                 hasRemoveAction={true} 
                 cellClick={this.handleCellClick.bind(this)} />

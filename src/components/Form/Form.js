@@ -12,8 +12,11 @@ export class Form extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0)
-      this.setState({changeSet: this.getDefultChangeSet(nextProps)});
+    if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0) {
+      const newChangeSet = this.getDefultChangeSet(nextProps);
+      this.setState({changeSet: newChangeSet});
+      if(this.props.handlePropertyChanged) this.props.handlePropertyChanged(newChangeSet);
+    }
   }
 
   getDefultChangeSet = props => {
@@ -24,13 +27,17 @@ export class Form extends React.Component {
         value = firstPossibleValue.Key || "";
       } else if(property.Type === "dateRange") {
         value = ["", ""];
+      } else if(property.Type === "checkbox") {
+        value = false;
       }
       return {...set, [property.Key]: value};
     }, {});
   };
 
   handleChangeProperty = (propertyKey, value) => {    
-    this.setState({changeSet: {...this.state.changeSet, [propertyKey]: value}});
+    const newChangeSet = {...this.state.changeSet, [propertyKey]: value};
+    if(this.props.handlePropertyChanged) this.props.handlePropertyChanged(newChangeSet);
+    this.setState({changeSet: newChangeSet});
   };
 
   handlrForm = _ => {
@@ -71,5 +78,6 @@ Form.propTypes ={
   })),
   formName: PropTypes.string,
   buttonName: PropTypes.string,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  handlePropertyChanged: PropTypes.func
 };
