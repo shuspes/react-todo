@@ -81,7 +81,7 @@ export class Form extends React.Component {
         {
           isValid 
             ? null 
-            : validationMessages.map(message => <span className="css-form-validation-error">{message}</span>)
+            : validationMessages.map((message, index) => <span key={index} className="css-form-validation-error">{message}</span>)
         }
       </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./App.css";
-import { getAppSettings, getTasks, addTask, removeTask } from "../../utils/apiWrapper";
+import { getAppSettings, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
 import filterFunc from "../../utils/filter";
 import { Table } from "../../components/Table";
 import { CreateForm } from "../CreateForm";
@@ -47,6 +47,8 @@ export class App extends React.Component {
             this.setState({tasksList: newTasksList});
           }
         });
+      } else {
+        editTask(taskId, {[propertyKey]: value}).then(tasksList => this.setState({tasksList}));
       }
     }
   };
