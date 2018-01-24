@@ -7,7 +7,8 @@ export class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      changeSet: this.getDefultChangeSet(props)
+      changeSet: this.getDefultChangeSet(props),
+      isValid: true
     };
   }
 
@@ -40,14 +41,25 @@ export class Form extends React.Component {
     this.setState({changeSet: newChangeSet});
   };
 
-  handlrForm = _ => {
-    if(this.props.handleSubmit) this.props.handleSubmit(this.state.changeSet);
-    this.setState({changeSet: this.getDefultChangeSet(this.props)});
+  validateForm = () => {
+    return this.props.properties
+      .filter(it => typeof it.ValidateFunc === "function")
+      .map(it => it.ValidateFunc(this.state.changeSet[it.Key]) ? "" : it.ValidationMessage).filter(it => it !== "");
+  };
+
+  handlForm = _ => {
+    const validationMessages = this.validateForm();
+    if(validationMessages.length > 0) {
+      this.setState({isValid: false, validationMessages});
+    } else {
+      if(this.props.handleSubmit) this.props.handleSubmit(this.state.changeSet);
+      this.setState({changeSet: this.getDefultChangeSet(this.props), isValid: true, validationMessages: []});
+    }
   };
 
   render() {
     const {properties = [], formName = "", buttonName = ""} = this.props;
-    const {changeSet = {}} = this.state;
+    const {changeSet = {}, isValid = true, validationMessages = []} = this.state;
     return (
       <div className="css-form">
         <div className="css-form-name">
@@ -64,7 +76,12 @@ export class Form extends React.Component {
           }
         </div>
         {
-          buttonName !== "" && (<button onClick={this.handlrForm}>{buttonName}</button>)
+          buttonName !== "" && (<button onClick={this.handlForm}>{buttonName}</button>)
+        }
+        {
+          isValid 
+            ? null 
+            : validationMessages.map(message => <span className="css-form-validation-error">{message}</span>)
         }
       </div>
     );

@@ -10,7 +10,9 @@ propertyTemplate = {
   ShouldDisplayLabel, (false by default)
   IsSortable,
   dependentProperty, (array|string)
-  ShouldIgnoreByValue
+  ShouldIgnoreByValue,
+  ValidateFunc,
+  ValidationMessage
 }
 */
 
@@ -42,7 +44,9 @@ export const tasksProperties = [
     DisplayName: "Title",
     Type: "string",
     ForForm: true,
-    ForTable: true
+    ForTable: true,
+    ValidateFunc: value => value !== "",
+    ValidationMessage: "Title is required."
   },
   {
     Key: "Priority",
@@ -83,7 +87,7 @@ export const tasksProperties = [
     DisplayName: "Description",
     Type: "textarea",
     ForForm: true,
-    ForTable: false    
+    ForTable: false  
   }
 ];
 

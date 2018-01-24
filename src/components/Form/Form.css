@@ -11,3 +11,8 @@
   width: auto;
   width: fit-content;
 }
+
+.css-form-validation-error {
+  color: red;
+  padding: 0 3px;
+}
