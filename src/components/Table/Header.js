@@ -14,7 +14,10 @@ class Header extends React.Component {
         <tr>
           {
             columns.map(column => 
-              <th key={column.Key} onClick={this.handleSort.bind(this, column.Key)}>
+              <th key={column.Key} 
+                  onClick={column.IsSortable == null || column.IsSortable 
+                    ? this.handleSort.bind(this, column.Key) 
+                    : null}>
                 {column.DisplayName}
                 {
                   column.IsSortable == null || column.IsSortable
