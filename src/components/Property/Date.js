@@ -7,13 +7,14 @@ class Date extends React.Component {
   };
 
   render() {
-    const {className = "", isReadonly = false, property = {}, value = ""} = this.props;    
+    const {className = "", isReadonly = false, property = {}, value = "", isDisabled = false} = this.props;    
     return isReadonly
     ? value
     : (
       <input className={className + " css-property"} 
               type="date" 
               value={value} 
+              disabled={isDisabled}
               onChange={this.handleChange} />
     );
   };
@@ -24,7 +25,8 @@ Date.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
   property: PropTypes.object,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
 
 export default Date;

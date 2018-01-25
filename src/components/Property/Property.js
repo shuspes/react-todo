@@ -19,28 +19,29 @@ export class Property extends React.Component {
         Type
       },
       className = "",
-      onChangeProperty
+      onChangeProperty,
+      isDisabled = false
     } = this.props;
     
     switch (Type) {
       case "string":
-        return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <String isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "combo":
-        return <Combo onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Combo isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "checkbox":
-        return <Checkbox onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Checkbox isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "date":
-        return <Date onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Date isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "textarea":
-        return <Textarea onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Textarea isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "longString":
-        return <String onChange={onChangeProperty} property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
+        return <String isDisabled={isDisabled} onChange={onChangeProperty} property={property} isReadonly={isReadonly} value={value} className={className + " css-longString"} />
       case "button":
-        return <Button onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} />;
+        return <Button isDisabled={isDisabled} onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} />;
       case "dateRange":
-        return <DateRange onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} value={value} />;        
+        return <DateRange isDisabled={isDisabled} onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} value={value} />;        
       default:
-        return <String onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <String isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
     };
   };
 };
@@ -56,5 +57,6 @@ Property.propTypes = {
     Type: PropTypes.string
   }).isRequired,
   className: PropTypes.string,
-  onChangeProperty: PropTypes.func
+  onChangeProperty: PropTypes.func,
+  isDisabled: PropTypes.bool
 };

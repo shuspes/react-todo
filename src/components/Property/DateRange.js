@@ -12,7 +12,7 @@ class DateRange extends React.Component {
   };
 
   render() {    
-    const {className = "", isReadonly = false, property = {}, value = ["", ""]} = this.props;   
+    const {className = "", isReadonly = false, property = {}, value = ["", ""], isDisabled = false} = this.props;   
     if (value.length < 2) return null; 
     const dateFromVal = value[0];
     const dateToVal = value[1];
@@ -21,11 +21,13 @@ class DateRange extends React.Component {
       <div style={{display: "inline-block"}}>
         <Date onChange={this.handleChange.bind(this, "DateRangeFrom")} 
               className={className} 
+              isDisabled={isDisabled}
               isReadonly={isReadonly} 
               value={dateFromVal}
               property={({...property, Key: "DateRangeFrom", DisplayName: property.DisplayName + " From"})} />
         <Date onChange={this.handleChange.bind(this, "DateRangeTo")} 
               className={className} 
+              isDisabled={isDisabled}
               isReadonly={isReadonly} 
               value={dateToVal}
               property={({...property, Key: "DateRangeTo", DisplayName: property.DisplayName + " To"})} />
@@ -39,7 +41,8 @@ DateRange.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string),
   className: PropTypes.string,
   property: PropTypes.object,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
 
 export default DateRange;

@@ -8,10 +8,11 @@ class String extends React.Component {
   };
 
   render() {
-    const {isReadonly = false, property = {}, className = "", value = ""} = this.props;
+    const {isReadonly = false, property = {}, className = "", value = "", isDisabled = false} = this.props;
     return isReadonly
       ? value
       : <Input placeholder={property.DisplayName} 
+                disabled={isDisabled}
                 value={value} 
                 className={"css-property " + className} 
                 onChange={this.handleChange} />
@@ -25,7 +26,8 @@ String.propTypes = {
     DisplayName: PropTypes.string
   }),
   className: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
 
 export default String;

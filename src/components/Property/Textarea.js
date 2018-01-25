@@ -8,12 +8,13 @@ class Textarea extends React.Component {
   };
 
   render() {
-    const {className = "", isReadonly = false, property = {}, value = ""} = this.props;    
+    const {className = "", isReadonly = false, property = {}, value = "", isDisabled = false} = this.props;    
     return isReadonly
       ? value
       : (
         <Form className={className + " css-property"}>
           <TextArea placeholder={property.DisplayName} 
+                    disabled={isDisabled}
                     value={value} 
                     autoHeight={true}
                     onChange={this.handleChange} />
@@ -29,7 +30,8 @@ Textarea.propTypes = {
     DisplayName: PropTypes.string
   }),
   className: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
 
 export default Textarea;

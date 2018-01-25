@@ -4,9 +4,9 @@ import { Button as SemanticButton } from 'semantic-ui-react';
 
 class Button extends React.Component {
   render() {
-    const {className = "", property = {}, onChange, isReadonly = false} = this.props;
+    const {className = "", property = {}, onChange, isReadonly = false, isDisabled = false} = this.props;
     return <SemanticButton color="red" 
-                  disabled={isReadonly} 
+                  disabled={isReadonly || isDisabled} 
                   className={className} 
                   onClick={onChange}>
                     {property.DisplayName}
@@ -18,7 +18,8 @@ Button.propTypes = {
   isReadonly: PropTypes.bool,
   onChange: PropTypes.func,
   property: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  isDisabled: PropTypes.bool
 };
 
 export default Button;

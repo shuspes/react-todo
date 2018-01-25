@@ -8,18 +8,13 @@ class Checkbox extends React.Component {
   };
 
   render() {
-    const {isReadonly = false, property = {}, className = "", value = false} = this.props;
+    const {isReadonly = false, property = {}, className = "", value = false, isDisabled = false} = this.props;
     return <SemanticCheckbox checked={Boolean(value)} 
                     readOnly={isReadonly} 
+                    disabled={isDisabled}
                     onChange={this.handleChange}
                     className={className + " css-property"}
                     label={property.ShouldDisplayLabel ? property.DisplayName : ""} />
-    // return (
-    //   <label className={className + " css-property"}>
-    //     <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
-    //     {property.ShouldDisplayLabel && property.DisplayName}
-    //   </label>
-    // );
   };
 };
 
@@ -34,7 +29,8 @@ Checkbox.propTypes = {
     DisplayName: PropTypes.string
   }),
   className: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
 
 export default Checkbox;
