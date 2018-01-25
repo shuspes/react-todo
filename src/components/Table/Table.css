@@ -12,6 +12,10 @@ td, th {
   padding: 5px;
 }
 
+tr {
+	cursor: pointer;
+}
+
 .css-sort-asc,
 .css-sort-desc {
   border: 4px solid transparent;

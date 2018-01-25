@@ -4,10 +4,10 @@ import Cell from "./Cell";
 
 class Row extends React.Component {
   render() {
-    const {columns = [], row = {}, editableColumns = [], cellClick} = this.props; 
+    const {columns = [], row = {}, editableColumns = [], cellClick, openItem} = this.props; 
 
     return (
-      <tr>
+      <tr onDoubleClick={openItem ? openItem.bind(this, row.Id): null}>
         {
           columns.map(column => 
               <Cell key={column.Key} 
@@ -26,7 +26,8 @@ Row.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   editableColumns: PropTypes.arrayOf(PropTypes.string),
   row: PropTypes.object,
-  cellClick: PropTypes.func
+  cellClick: PropTypes.func,
+  openItem: PropTypes.func
 };
 
 export default Row;

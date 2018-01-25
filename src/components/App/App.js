@@ -1,10 +1,12 @@
 import React from 'react';
+import { Modal } from "semantic-ui-react";
 import "./App.css";
 import { getAppSettings, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
 import filterFunc from "../../utils/filter";
 import { Table } from "../../components/Table";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
+import { EditForm } from "../EditForm";
 import { tasksList } from '../../utils/appData';
 
 export class App extends React.Component {
@@ -12,7 +14,8 @@ export class App extends React.Component {
     filterFormProp: [],
     tasksProperties: [],
     tasksList: [],
-    filterObject: {}
+    filterObject: {},
+    taskId: null
   };
 
   componentWillMount() {
@@ -53,21 +56,36 @@ export class App extends React.Component {
     }
   };
 
+  handleOpenTask = taskId => {    
+    this.setState({taskId});
+  };
+
+  handleCloseTask = _ => {
+    this.setState({taskId: null});    
+  };
+
   render() {
-    const {filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}} = this.state;
-    const addFormProp = tasksProperties.filter(it => it.ForForm);
+    const {filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}, taskId} = this.state;
+    const formProp = tasksProperties.filter(it => it.ForForm);
     const tableColumns = tasksProperties.filter(it => it.ForTable);
     const filteredList = filterFunc(tasksList, filterFormProp, filterObject);    
 
     return (
       <div className="css-todoApp">
-        <CreateForm properties={addFormProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        
+        <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} >
+          <EditForm task={tasksList.find(it => it.Id === taskId)} 
+                    properties={formProp} 
+                    formName="Edit Task" 
+                    buttonName="Edit" /*addTask={this.addTask}*/ />                    
+        </Modal>
+        <CreateForm properties={formProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        
         <FilterForm properties={filterFormProp} formName="Filter" filterChanged={filterObject => this.setState({filterObject})} />
         <Table columns={tableColumns} 
                 rows={filteredList} 
                 editableColumns={["IsComplete"]} 
                 hasRemoveAction={true} 
-                cellClick={this.handleCellClick.bind(this)} />
+                cellClick={this.handleCellClick.bind(this)}
+                openItem={this.handleOpenTask.bind(this)} />
       </div>
     );
   }

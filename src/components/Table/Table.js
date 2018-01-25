@@ -32,7 +32,7 @@ export class Table extends React.Component {
   };
 
   render() {
-    const {columns = [], rows = [], editableColumns = [], hasRemoveAction = false} = this.props;
+    const {columns = [], rows = [], editableColumns = [], hasRemoveAction = false, openItem} = this.props;
     const {sortPropertyKey, sortOrder} = this.state;
     const tableColumns = hasRemoveAction ? [...columns, this.getRemoveProperty()] : columns;
     const tableEditableColumns = hasRemoveAction ? [...editableColumns, "Remove"] : editableColumns;
@@ -47,7 +47,8 @@ export class Table extends React.Component {
         <Body columns={tableColumns} 
               rows={sortedRows} 
               editableColumns={tableEditableColumns} 
-              cellClick={this.handleCellClick} />
+              cellClick={this.handleCellClick}
+              openItem={openItem} />
       </table>
     );
   };
@@ -58,5 +59,6 @@ Table.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object),
   editableColumns: PropTypes.arrayOf(PropTypes.string),
   hasRemoveAction: PropTypes.bool,
-  cellClick: PropTypes.func
+  cellClick: PropTypes.func,
+  openItem: PropTypes.func
 };

@@ -22,6 +22,7 @@ export class Form extends React.Component {
   }
 
   getDefultChangeSet = props => {
+    if(props.itemValues) return props.itemValues;
     return props.properties.reduce((set, property) => {
       let value = "";
       if(property.Type === "combo") {
@@ -59,7 +60,7 @@ export class Form extends React.Component {
   };
 
   render() {
-    const {properties = [], formName = "", buttonName = ""} = this.props;
+    const {properties = [], formName = "", buttonName = "", isDisabled = false} = this.props;
     const {changeSet = {}, isValid = true, validationMessages = []} = this.state;
     return (
       <div className="css-form">
@@ -70,6 +71,7 @@ export class Form extends React.Component {
           {
             properties.map(property => 
                 <Property key={property.Key} 
+                          isDisabled={isDisabled}
                           property={property} 
                           value={changeSet[property.Key] || ""}
                           onChangeProperty={this.handleChangeProperty.bind(this, property.Key)} />
@@ -77,7 +79,7 @@ export class Form extends React.Component {
           }
         </div>
         {
-          buttonName !== "" && (<Button color="green" onClick={this.handlForm}>{buttonName}</Button>)
+          buttonName !== "" && (<Button disabled={isDisabled} color="green" onClick={this.handlForm}>{buttonName}</Button>)
         }
         {
           isValid 
@@ -94,8 +96,10 @@ Form.propTypes ={
     Key: PropTypes.string,
     Type: PropTypes.string,
   })),
+  itemValues: PropTypes.object,
   formName: PropTypes.string,
   buttonName: PropTypes.string,
   handleSubmit: PropTypes.func,
-  handlePropertyChanged: PropTypes.func
+  handlePropertyChanged: PropTypes.func,
+  isDisabled: PropTypes.bool
 };
