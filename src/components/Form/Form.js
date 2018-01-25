@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import { Button } from 'semantic-ui-react';
 import "./Form.css";
 import { Property } from "../Property";
 
@@ -76,7 +77,7 @@ export class Form extends React.Component {
           }
         </div>
         {
-          buttonName !== "" && (<button onClick={this.handlForm}>{buttonName}</button>)
+          buttonName !== "" && (<Button color="green" onClick={this.handlForm}>{buttonName}</Button>)
         }
         {
           isValid 

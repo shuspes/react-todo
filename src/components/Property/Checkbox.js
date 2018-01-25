@@ -1,19 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Checkbox as SemanticCheckbox } from 'semantic-ui-react'
 
 class Checkbox extends React.Component {
-  handleChange = ev => {
-    if(this.props.onChange) this.props.onChange(ev.target.checked);  
+  handleChange = (ev, data) => {
+    if(this.props.onChange) this.props.onChange(data.checked);  
   };
 
   render() {
     const {isReadonly = false, property = {}, className = "", value = false} = this.props;
-    return (
-      <label className={className + " css-property"}>
-        <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
-        {property.ShouldDisplayLabel && property.DisplayName}
-      </label>
-    );
+    return <SemanticCheckbox checked={Boolean(value)} 
+                    readOnly={isReadonly} 
+                    onChange={this.handleChange}
+                    className={className + " css-property"}
+                    label={property.ShouldDisplayLabel ? property.DisplayName : ""} />
+    // return (
+    //   <label className={className + " css-property"}>
+    //     <input className="css-checkbox" type="checkbox" checked={value} disabled={isReadonly} onChange={this.handleChange} />
+    //     {property.ShouldDisplayLabel && property.DisplayName}
+    //   </label>
+    // );
   };
 };
 

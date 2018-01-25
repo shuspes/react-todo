@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Input } from 'semantic-ui-react'
 
 class String extends React.Component {
-  handleChange = ev => {
-    if(this.props.onChange) this.props.onChange(ev.target.value);
+  handleChange = (ev, data) => {
+    if(this.props.onChange) this.props.onChange(data.value);
   };
 
   render() {
     const {isReadonly = false, property = {}, className = "", value = ""} = this.props;
     return isReadonly
       ? value
-      : <input placeholder={property.DisplayName} 
+      : <Input placeholder={property.DisplayName} 
                 value={value} 
                 className={"css-property " + className} 
                 onChange={this.handleChange} />

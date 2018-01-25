@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Select } from 'semantic-ui-react'
 
 class Combo extends React.Component {
   getValue() {
@@ -20,22 +21,31 @@ class Combo extends React.Component {
     return currentValue ? currentValue.DisplayName : "";    
   }
 
-  handleChange = ev => {
-    if(this.props.onChange) this.props.onChange(ev.target.value);
+  handleChange = (ev, data) => {
+    if(this.props.onChange) this.props.onChange(data.value);
   };
 
   render() {
     const {isReadonly = false, property = {}, className = ""} = this.props;
     const {PossibleValues: possibleValues = []} = property;
+    const selectedValue = this.getValue();
 
     return isReadonly
     ? (<span>{this.getDisplayValue()}</span>)
     : (
-      <select className={className + " css-property"} value={this.getValue()} onChange={this.handleChange}>
-        {
-          possibleValues.map(it => (<option key={it.Key} value={it.Key}>{it.DisplayName}</option>))
-        }
-      </select>
+      <Select className={className + " css-property"} 
+              value={selectedValue} 
+              onChange={this.handleChange} 
+              options={possibleValues.map(it => ({
+                key: it.Key,
+                text: it.DisplayName,
+                value: it.Key
+              }))} />
+      // <select className={className + " css-property"} value={this.getValue()} onChange={this.handleChange}>
+      //   {
+      //     possibleValues.map(it => (<option key={it.Key} value={it.Key}>{it.DisplayName}</option>))
+      //   }
+      // </select>
     );
   };
 };

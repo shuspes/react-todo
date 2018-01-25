@@ -33,5 +33,5 @@ export const removeTask = taskId => {
 export const editTask = (taskId, changeSet) => {
   tasksList = tasksList.map(task => task.Id === taskId ? {...task, ...changeSet} : task);
   saveTasks();
-  return new Promise(resolve => setTimeout(resolve, 2000, tasksList));
+  return new Promise(resolve => setTimeout(resolve, 0, tasksList));
 };

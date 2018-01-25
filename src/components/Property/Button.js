@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button as SemanticButton } from 'semantic-ui-react';
 
 class Button extends React.Component {
   render() {
     const {className = "", property = {}, onChange, isReadonly = false} = this.props;
-    return <button className={className} onClick={onChange} disabled={isReadonly}>{property.DisplayName}</button>;
+    return <SemanticButton color="red" 
+                  disabled={isReadonly} 
+                  className={className} 
+                  onClick={onChange}>
+                    {property.DisplayName}
+            </SemanticButton>
   }
 };
 
