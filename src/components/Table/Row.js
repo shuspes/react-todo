@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Table } from 'semantic-ui-react';
 import Cell from "./Cell";
 
 class Row extends React.Component {
@@ -7,7 +8,7 @@ class Row extends React.Component {
     const {columns = [], row = {}, editableColumns = [], cellClick, openItem} = this.props; 
 
     return (
-      <tr onDoubleClick={openItem ? openItem.bind(this, row.Id): null}>
+      <Table.Row onDoubleClick={openItem ? openItem.bind(this, row.Id): null}>
         {
           columns.map(column => 
               <Cell key={column.Key} 
@@ -17,7 +18,7 @@ class Row extends React.Component {
                     cellClick={cellClick.bind(null, row.Id)} />
           )
         }
-      </tr>
+      </Table.Row>
     );
   }
 }

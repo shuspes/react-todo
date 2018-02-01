@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Table } from 'semantic-ui-react';
 
 class Header extends React.Component {
   handleSort = columnKey => {
@@ -10,32 +11,28 @@ class Header extends React.Component {
     const {columns = {}, sortPropertyKey, sortOrder} = this.props;
 
     return (
-      <thead>
-        <tr>
+      <Table.Header>
+        <Table.Row>
           {
-            columns.map(column => 
-              <th key={column.Key} 
-                  onClick={column.IsSortable == null || column.IsSortable 
-                    ? this.handleSort.bind(this, column.Key) 
-                    : null}>
-                {column.DisplayName}
-                {
-                  column.IsSortable == null || column.IsSortable
-                    ? sortPropertyKey === column.Key
-                      ? <span className={"css-sort-" + sortOrder}/>
-                      : (
-                          <div>
-                            <span className="css-sort-asc"/>
-                            <span className="css-sort-desc"/>
-                          </div>
-                      )
-                    : null
-                }
-              </th>
-            )
+            columns.map(column => {
+              const sortDirection = column.IsSortable == null || column.IsSortable
+                ? sortPropertyKey === column.Key
+                  ? sortOrder
+                  : null
+                : null;
+
+              return (
+                <Table.HeaderCell key={column.Key} sorted={sortDirection} 
+                          onClick={column.IsSortable == null || column.IsSortable 
+                              ? this.handleSort.bind(this, column.Key) 
+                              : null} >
+                  {column.DisplayName}
+                </Table.HeaderCell>
+              );
+            })
           }
-        </tr>
-      </thead>
+        </Table.Row>
+      </Table.Header>
     );
   }
 }

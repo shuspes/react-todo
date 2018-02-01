@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Table } from 'semantic-ui-react';
 import { Property } from "../Property";
 
 class Cell extends React.Component {
@@ -7,13 +8,13 @@ class Cell extends React.Component {
     const {column = {}, value = "", editableColumns = [], cellClick} = this.props; 
 
     return (
-      <td>
+      <Table.Cell>
         <Property className="css-property-table" 
                   value={value} 
                   property={column} 
                   isReadonly={!editableColumns.includes(column.Key)}
                   onChangeProperty={cellClick.bind(null, column.Key)} />
-      </td>
+      </Table.Cell>
     );
   }
 }

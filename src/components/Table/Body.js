@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Table } from 'semantic-ui-react';
 import Row from "./Row";
 
 class Body extends React.Component {
@@ -7,16 +8,16 @@ class Body extends React.Component {
     const {columns = [], rows = [], editableColumns = [], cellClick, openItem} = this.props;
 
     return (
-      <tbody>
-      {
-        rows.map(row => <Row key={row.Id} 
-                              row={row} 
-                              columns={columns} 
-                              editableColumns={editableColumns} 
-                              cellClick={cellClick}
-                              openItem={openItem}/>)
-      }
-      </tbody>
+      <Table.Body>
+        {
+          rows.map(row => <Row key={row.Id} 
+                                row={row} 
+                                columns={columns} 
+                                editableColumns={editableColumns} 
+                                cellClick={cellClick}
+                                openItem={openItem}/>)
+        }
+      </Table.Body>
     );
   }
 }

@@ -5,12 +5,12 @@ export default (list, propertyKey, order) => {
     const bProp = b[propertyKey];
 
     return aProp > bProp 
-      ? order === "asc" 
+      ? order === "ascending" 
         ? 1 
         : -1
       : aProp === bProp 
         ? 0 
-        : order === "asc" 
+        : order === "ascending" 
           ? -1 
           : 1;
   });

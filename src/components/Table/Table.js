@@ -4,11 +4,12 @@ import "./Table.css";
 import sortBy from "../../utils/sortBy";
 import Header from "./Header";
 import Body from "./Body";
+import { Table as SemanticTable } from 'semantic-ui-react'
 
 export class Table extends React.Component {
   state = {
     sortPropertyKey: null,
-    sortOrder: "asc"
+    sortOrder: "ascending"
   };
 
   getRemoveProperty = _ => ({
@@ -25,9 +26,9 @@ export class Table extends React.Component {
 
   handleSortClick = propertyKey => {
     if(this.state.sortPropertyKey === propertyKey) {
-      this.setState({sortOrder: this.state.sortOrder === "asc" ? "desc" : "asc"});
+      this.setState({sortOrder: this.state.sortOrder === "ascending" ? "descending" : "ascending"});
     } else {
-      this.setState({sortPropertyKey: propertyKey, sortOrder: "asc"});
+      this.setState({sortPropertyKey: propertyKey, sortOrder: "ascending"});
     }
   };
 
@@ -39,7 +40,7 @@ export class Table extends React.Component {
     const sortedRows = sortBy(rows, sortPropertyKey, sortOrder);
 
     return (
-      <table className="css-table">
+      <SemanticTable className="css-table" sortable fixed>
         <Header columns={tableColumns} 
                 onSort={this.handleSortClick} 
                 sortPropertyKey={sortPropertyKey} 
@@ -49,7 +50,7 @@ export class Table extends React.Component {
               editableColumns={tableEditableColumns} 
               cellClick={this.handleCellClick}
               openItem={openItem} />
-      </table>
+      </SemanticTable>
     );
   };
 };

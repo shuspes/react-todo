@@ -11,11 +11,12 @@ class Date extends React.Component {
     return isReadonly
     ? value
     : (
-      <input className={className + " css-property"} 
-              type="date" 
-              value={value} 
-              disabled={isDisabled}
-              onChange={this.handleChange} />
+      <div className={className + " css-property ui input"} >
+        <input style={{padding: "8px"}} type="date" 
+                value={value} 
+                disabled={isDisabled}
+                onChange={this.handleChange} />
+      </div>
     );
   };
 };
