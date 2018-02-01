@@ -4,14 +4,14 @@ import { Form } from "../Form";
 
 export class EditForm extends React.Component {
   render() {
-    const {properties = [], buttonName = "", task = {}} = this.props;
+    const {properties = [], buttonName = "", task = {}, editTask} = this.props;
     return (
       <Form shouldDisplayBorder={false} 
             itemValues={task} 
             isDisabled={task.IsComplete} 
             properties={properties} 
             buttonName={buttonName} 
-            handleSubmit={null} />
+            handleSubmit={editTask} />
     );
   };
 };
@@ -19,6 +19,6 @@ export class EditForm extends React.Component {
 EditForm.propTypes = {
   properties: PropTypes.array,
   buttonName: PropTypes.string,
-  task: PropTypes.object
-  // addTask: PropTypes.func
+  task: PropTypes.object,
+  editTask: PropTypes.func
 };

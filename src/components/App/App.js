@@ -31,6 +31,10 @@ export class App extends React.Component {
     addTask(task).then(tasksList => this.setState({tasksList}));
   };
 
+  editTask = (taskId, task) => { 
+    editTask(taskId, task).then(tasksList => this.setState({tasksList})).then(_ => this.setState({taskId: null}));
+  };
+
   handleCellClick(taskId, propertyKey, value) {
     if(taskId && propertyKey) {
       const {tasksList = []} = this.state;
@@ -76,7 +80,8 @@ export class App extends React.Component {
         <Modal.Header>Edit Task</Modal.Header>
           <EditForm task={tasksList.find(it => it.Id === taskId)} 
                     properties={formProp} 
-                    buttonName="Edit" /*addTask={this.addTask}*/ />                    
+                    buttonName="Edit" 
+                    editTask={this.editTask.bind(this, taskId)} />                    
         </Modal>
         <CreateForm properties={formProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        
         <FilterForm properties={filterFormProp} formName="Filter" filterChanged={filterObject => this.setState({filterObject})} />
