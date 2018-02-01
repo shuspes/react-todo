@@ -13,8 +13,8 @@ class Textarea extends React.Component {
       ? value
       : (
         <Form className={className + " css-property"}>
-          <TextArea placeholder={property.DisplayName} 
-                    disabled={isDisabled}
+          <TextArea className={"field " + (isDisabled ? "disabled" : "")}
+                    placeholder={property.DisplayName} 
                     value={value} 
                     autoHeight={true}
                     onChange={this.handleChange} />
