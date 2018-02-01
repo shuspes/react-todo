@@ -72,10 +72,10 @@ export class App extends React.Component {
 
     return (
       <div className="css-todoApp">
-        <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} >
+        <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} closeIcon={true} >
+        <Modal.Header>Edit Task</Modal.Header>
           <EditForm task={tasksList.find(it => it.Id === taskId)} 
                     properties={formProp} 
-                    formName="Edit Task" 
                     buttonName="Edit" /*addTask={this.addTask}*/ />                    
         </Modal>
         <CreateForm properties={formProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        

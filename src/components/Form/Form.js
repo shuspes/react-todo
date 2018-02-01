@@ -60,10 +60,10 @@ export class Form extends React.Component {
   };
 
   render() {
-    const {properties = [], formName = "", buttonName = "", isDisabled = false} = this.props;
+    const {properties = [], formName = "", buttonName = "", isDisabled = false, shouldDisplayBorder = true} = this.props;
     const {changeSet = {}, isValid = true, validationMessages = []} = this.state;
     return (
-      <div className="css-form">
+      <div className={"css-form " + (shouldDisplayBorder ? "border" : "")}>
         <div className="css-form-name">
           {formName}
         </div>
@@ -79,7 +79,7 @@ export class Form extends React.Component {
           }
         </div>
         {
-          buttonName !== "" && (<Button disabled={isDisabled} color="green" onClick={this.handlForm}>{buttonName}</Button>)
+          buttonName !== "" && (<Button className="css-form-actionButton" disabled={isDisabled} color="green" onClick={this.handlForm}>{buttonName}</Button>)
         }
         {
           isValid 
@@ -101,5 +101,6 @@ Form.propTypes ={
   buttonName: PropTypes.string,
   handleSubmit: PropTypes.func,
   handlePropertyChanged: PropTypes.func,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  shouldDisplayBorder: PropTypes.bool
 };
