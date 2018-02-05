@@ -2,27 +2,7 @@ export default (list, dependentProperties, values) => {
   return list.filter(item => {
     return dependentProperties.every(prop => {
       if(prop.Type === "dateRange") {
-        let itemValue = item[prop.DependentProperty];
-        const propValue = values[prop.Key];
-        if(!Array.isArray(propValue) || propValue.length < 2) return true;
-        if(itemValue == null) return true;
-        const fromValue = new Date(propValue[0]);
-        const toValue = new Date(propValue[1]);
-        itemValue = new Date(itemValue);
-
-        if(propValue.every(val => val === "")) {
-          return true;
-        } else if(propValue.some(val => val === "")) {
-          return (propValue[0] !== "" 
-            && (itemValue >= fromValue 
-              || (prop.ShouldIgnoreByValue != null && prop.ShouldIgnoreByValue === fromValue))) 
-          || (propValue[1] !== "" 
-            && (itemValue <= toValue
-              || (prop.ShouldIgnoreByValue != null && prop.ShouldIgnoreByValue === toValue)));
-        } else {
-          return (itemValue >= fromValue || (prop.ShouldIgnoreByValue != null && prop.ShouldIgnoreByValue === fromValue)) 
-            && (itemValue <= toValue || (prop.ShouldIgnoreByValue != null && prop.ShouldIgnoreByValue === toValue));
-        }
+        return filterDateRangeProperty(item, prop, values);
       } else if(Array.isArray(prop.DependentProperty)) {
         return prop.DependentProperty
           .some(dependencyProp => filterOneProperty(
@@ -45,7 +25,7 @@ export default (list, dependentProperties, values) => {
   });
 };
 
-const filterOneProperty =(item, dependentProperty, shouldIgnoreByValue, propertyType, value) => {
+const filterOneProperty = (item, dependentProperty, shouldIgnoreByValue, propertyType, value) => {
   if(shouldIgnoreByValue != null && shouldIgnoreByValue === value) return true;
   if(value == null || value === "") return true;  
   if(item[dependentProperty] == null) return true;
@@ -53,4 +33,29 @@ const filterOneProperty =(item, dependentProperty, shouldIgnoreByValue, property
     return item[dependentProperty].toLowerCase().includes(value.toLowerCase());
   }
   return item[dependentProperty] === value;
+};
+
+const filterDateRangeProperty = (item, prop, values) => {
+  let itemValue = item[prop.DependentProperty];
+  const propValue = values[prop.Key];
+  if(!Array.isArray(propValue) || propValue.length < 2 
+        || propValue.every(val => val === "") || itemValue == null) return true;
+
+  const fromValue = new Date(propValue[0]);
+  const toValue = new Date(propValue[1]);
+  itemValue = new Date(itemValue);
+  const ignoredValue = prop.ShouldIgnoreByValue;
+
+  if(propValue.some(val => val === "")) { //NOTE: exists only one value
+    if(propValue[0] !== "") { //NOTE: exists only from
+      return itemValue >= fromValue || (ignoredValue != null && ignoredValue === fromValue)
+    }
+    if(propValue[1] !== "") { //NOTE: exists only to
+      return itemValue <= toValue || (ignoredValue != null && ignoredValue === toValue)
+    }
+    return true;
+  } else { //NOTE: exists both values
+    return (itemValue >= fromValue || (ignoredValue != null && ignoredValue === fromValue)) 
+      && (itemValue <= toValue || (ignoredValue != null && ignoredValue === toValue));
+  }
 };
