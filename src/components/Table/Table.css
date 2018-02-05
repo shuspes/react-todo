@@ -1,0 +1,35 @@
+.css-table {
+  width: 100%;
+}
+
+th {
+  text-align: start;
+  position: relative;
+}
+
+td, th {
+  padding: 5px;
+}
+
+.css-sort-asc,
+.css-sort-desc {
+  cursor: pointer;
+  border: 4px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	right: 5px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+
+.css-sort-asc {
+  border-bottom-color: #666;
+	margin-top: -9px;
+}
+
+.css-sort-desc {
+  border-top-color: #666;
+	margin-top: 1px;
+}
