@@ -7,7 +7,7 @@ class Textarea extends React.Component {
     
     return isReadonly
       ? value
-      : <textarea className={className + " css-property"} placeholder={property.DisplayName} value={value} cols="100" rows="4"></textarea>
+      : <textarea className={className + " css-property"} placeholder={property.DisplayName} value={value}></textarea>
   };
 };
 
