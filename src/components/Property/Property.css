@@ -1,0 +1,21 @@
+.css-longString {
+  width: 90%;
+}
+
+textarea {
+  resize: none;
+  height: 60px;
+  width: 90%;
+}
+
+.css-property {
+  margin: 5px;
+}
+
+.css-checkbox {
+  margin-right: 5px;
+}
+
+.css-property-table {
+  margin: 0;
+}
