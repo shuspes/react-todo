@@ -1,4 +1,4 @@
-import { filterProperties, tasksProperties, tasksList as stubTasksList, createGuid } from "./appData";
+import { filterProperties, tasksProperties, properties, tasksList as stubTasksList, createGuid } from "./appData";
 
 const storageTaskListKey = "tasksList";
 
@@ -20,9 +20,12 @@ export const addTask = task => {
   return new Promise(resolve => setTimeout(resolve, 0, tasksList));
 }
 
+export const getProperties = () => new Promise(resolve => setTimeout(resolve, 0, (properties)));
+
+//TODO: remove after rewrite on redux
 export const getAppSettings = () => new Promise(resolve => setTimeout(resolve, 0, ({filterProperties, tasksProperties})));
 
-export const getTasks = _ => new Promise(resolve => setTimeout(resolve, 0, tasksList));
+export const getTasks = () => new Promise(resolve => setTimeout(resolve, 0, tasksList));
 
 export const removeTask = taskId => {
   tasksList = tasksList.filter(it => it.Id !== taskId); 
