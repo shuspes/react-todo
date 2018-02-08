@@ -1,1 +1,2 @@
-export * from "./App";
+import AppComponent from "./App";
+export const App = AppComponent;

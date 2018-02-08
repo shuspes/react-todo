@@ -1,7 +1,9 @@
 import React from 'react';
 import { Modal } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { loadProperties } from "../../actions";
 import "./App.css";
-import { getAppSettings, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
+import { getAppSettings, getProperties, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
 import filterFunc from "../../utils/filter";
 import { Table } from "../../components/Table";
 import { CreateForm } from "../CreateForm";
@@ -19,12 +21,14 @@ export class App extends React.Component {
   };
 
   componentWillMount() {
-    getAppSettings().then(({filterProperties, tasksProperties}) => {
-      return this.setState({
-        filterFormProp: filterProperties, 
-        tasksProperties: tasksProperties
+    getAppSettings().then(properties => {
+      this.setState({
+        filterFormProp: properties.filterProperties, 
+        tasksProperties: properties.tasksProperties
       });
-    }).then(getTasks).then(tasksList => this.setState({tasksList}));
+    }).then(getProperties)
+      .then(startupData => this.props.loadProperties(startupData))
+      .then(getTasks).then(tasksList => this.setState({tasksList}));
   }
 
   addTask = task => {
@@ -95,3 +99,9 @@ export class App extends React.Component {
     );
   }
 };
+
+const mapDispatchToProps = dispatch => ({
+  loadProperties: properties => dispatch(loadProperties(properties))
+});
+
+export default connect(undefined, mapDispatchToProps)(App);
