@@ -74,7 +74,6 @@ export class App extends React.Component {
 
   render() {
     const {filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}, taskId} = this.state;
-    const formProp = tasksProperties.filter(it => it.ForForm);
     const tableColumns = tasksProperties.filter(it => it.ForTable);
     const filteredList = filterFunc(tasksList, filterFormProp, filterObject);    
 
@@ -83,11 +82,9 @@ export class App extends React.Component {
         <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} closeIcon={true} >
         <Modal.Header>Edit Task</Modal.Header>
           <EditForm task={tasksList.find(it => it.Id === taskId)} 
-                    properties={formProp} 
-                    buttonName="Edit" 
                     editTask={this.editTask.bind(this, taskId)} />                    
         </Modal>
-        <CreateForm properties={formProp} formName="Add Task" buttonName="Add" addTask={this.addTask} />        
+        <CreateForm addTask={this.addTask} />        
         <FilterForm properties={filterFormProp} formName="Filter" filterChanged={filterObject => this.setState({filterObject})} />
         <Table columns={tableColumns} 
                 rows={filteredList} 

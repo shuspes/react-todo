@@ -1,1 +1,2 @@
-export * from "./CreateForm";
+import CreateFormComponent from "./CreateForm";
+export const CreateForm = CreateFormComponent;
