@@ -10,7 +10,7 @@ export class CreateForm extends React.Component {
   }
 
   render() {
-    const {properties, formName, buttonName, addTask} = this.props;
+    const { properties, formName, buttonName, addTask } = this.props;
     return (
       <Form properties={properties} formName={formName} buttonName={buttonName} handleSubmit={addTask} />
     );
@@ -31,7 +31,7 @@ const mapStateToProps = state => {
     } = {}
   } = state || {};
 
-  return {properties: filterProperties};
+  return { properties: filterProperties };
 };
 
 export default connect(mapStateToProps, undefined)(CreateForm);

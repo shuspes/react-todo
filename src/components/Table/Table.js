@@ -12,44 +12,44 @@ export class Table extends React.Component {
     sortOrder: "ascending"
   };
 
-  getRemoveProperty = _ => ({
+  getRemoveProperty = () => ({
     Key: "Remove",
-    DisplayOrder: 10000,  
+    DisplayOrder: 10000,
     DisplayName: "Remove",
     Type: "button",
     IsSortable: false
   });
 
   handleCellClick = (rowId, propertyKey, value) => {
-    if(this.props.cellClick) this.props.cellClick(rowId, propertyKey, value);
+    if (this.props.cellClick) this.props.cellClick(rowId, propertyKey, value);
   };
 
   handleSortClick = propertyKey => {
-    if(this.state.sortPropertyKey === propertyKey) {
-      this.setState({sortOrder: this.state.sortOrder === "ascending" ? "descending" : "ascending"});
+    if (this.state.sortPropertyKey === propertyKey) {
+      this.setState({ sortOrder: this.state.sortOrder === "ascending" ? "descending" : "ascending" });
     } else {
-      this.setState({sortPropertyKey: propertyKey, sortOrder: "ascending"});
+      this.setState({ sortPropertyKey: propertyKey, sortOrder: "ascending" });
     }
   };
 
   render() {
-    const {columns = [], rows = [], editableColumns = [], hasRemoveAction = false, openItem} = this.props;
-    const {sortPropertyKey, sortOrder} = this.state;
+    const { columns = [], rows = [], editableColumns = [], hasRemoveAction = false, openItem } = this.props;
+    const { sortPropertyKey, sortOrder } = this.state;
     const tableColumns = hasRemoveAction ? [...columns, this.getRemoveProperty()] : columns;
     const tableEditableColumns = hasRemoveAction ? [...editableColumns, "Remove"] : editableColumns;
     const sortedRows = sortBy(rows, sortPropertyKey, sortOrder);
 
     return (
       <SemanticTable className="css-table" sortable fixed>
-        <Header columns={tableColumns} 
-                onSort={this.handleSortClick} 
-                sortPropertyKey={sortPropertyKey} 
-                sortOrder={sortOrder} />
-        <Body columns={tableColumns} 
-              rows={sortedRows} 
-              editableColumns={tableEditableColumns} 
-              cellClick={this.handleCellClick}
-              openItem={openItem} />
+        <Header columns={tableColumns}
+          onSort={this.handleSortClick}
+          sortPropertyKey={sortPropertyKey}
+          sortOrder={sortOrder} />
+        <Body columns={tableColumns}
+          rows={sortedRows}
+          editableColumns={tableEditableColumns}
+          cellClick={this.handleCellClick}
+          openItem={openItem} />
       </SemanticTable>
     );
   };

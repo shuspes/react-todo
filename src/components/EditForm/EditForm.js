@@ -9,14 +9,14 @@ export class EditForm extends React.Component {
   }
 
   render() {
-    const {properties, buttonName, task = {}, editTask} = this.props;
+    const { properties, buttonName, task = {}, editTask } = this.props;
     return (
-      <Form shouldDisplayBorder={false} 
-            itemValues={task} 
-            isDisabled={task.IsComplete} 
-            properties={properties} 
-            buttonName={buttonName} 
-            handleSubmit={editTask} />
+      <Form shouldDisplayBorder={false}
+        itemValues={task}
+        isDisabled={task.IsComplete}
+        properties={properties}
+        buttonName={buttonName}
+        handleSubmit={editTask} />
     );
   };
 };
@@ -35,7 +35,7 @@ const mapStateToProps = state => {
     } = {}
   } = state || {};
 
-  return {properties: formProperties};
+  return { properties: formProperties };
 };
 
 export default connect(mapStateToProps, undefined)(EditForm);

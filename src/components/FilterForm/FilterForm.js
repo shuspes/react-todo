@@ -9,7 +9,7 @@ export class FilterForm extends React.Component {
   }
 
   render() {
-    const {properties, formName, filterChanged} = this.props;
+    const { properties, formName, filterChanged } = this.props;
     return (
       <Form properties={properties} formName={formName} handlePropertyChanged={filterChanged} />
     );
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
     } = {}
   } = state || {};
 
-  return {properties: filterProperties};
+  return { properties: filterProperties };
 };
 
 export default connect(mapStateToProps, undefined)(FilterForm);
