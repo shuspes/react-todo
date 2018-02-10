@@ -89,7 +89,7 @@ export class App extends React.Component {
                     editTask={this.editTask.bind(this, taskId)} />                    
         </Modal>
         <CreateForm addTask={this.addTask} />        
-        <FilterForm properties={filterFormProp} formName="Filter" filterChanged={filterObject => this.setState({filterObject})} />
+        <FilterForm filterChanged={filterObject => this.setState({filterObject})} />
         <Table columns={tableColumns} 
                 rows={filteredList} 
                 editableColumns={["IsComplete"]} 

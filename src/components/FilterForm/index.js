@@ -1,1 +1,2 @@
-export * from "./FilterForm";
+import FilterFormComponent from "./FilterForm";
+export const FilterForm = FilterFormComponent;
