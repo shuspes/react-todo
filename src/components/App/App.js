@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { loadProperties } from "../../actions";
+import { loadProperties, loadTasks } from "../../actions";
 import "./App.css";
 import { getAppSettings, getProperties, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
 import filterFunc from "../../utils/filter";
@@ -28,7 +28,11 @@ export class App extends React.Component {
       });
     }).then(getProperties)
       .then(startupData => this.props.loadProperties(startupData))
-      .then(getTasks).then(tasksList => this.setState({tasksList}));
+      .then(getTasks)
+      .then(tasksList => {
+        this.setState({tasksList});
+        this.props.loadTasks(tasksList);
+      });
   }
 
   addTask = task => {
@@ -98,7 +102,8 @@ export class App extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadProperties: properties => dispatch(loadProperties(properties))
+  loadProperties: properties => dispatch(loadProperties(properties)),
+  loadTasks: tasks => dispatch(loadTasks(tasks))
 });
 
 export default connect(undefined, mapDispatchToProps)(App);
