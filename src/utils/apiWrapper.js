@@ -15,9 +15,10 @@ tasksList = Array.isArray(tasksList) ? tasksList : stubTasksList;
 const saveTasks = () => localStorage.setItem(storageTaskListKey, JSON.stringify(tasksList));
 
 export const addTask = task => {
-  tasksList.push({...task, Id: createGuid(), IsComplete: false});
+  const newTask = {...task, Id: createGuid(), IsComplete: false};
+  tasksList.push(newTask);
   saveTasks();
-  return new Promise(resolve => setTimeout(resolve, 0, tasksList));
+  return new Promise(resolve => setTimeout(resolve, 0, newTask));
 }
 
 export const getProperties = () => new Promise(resolve => setTimeout(resolve, 0, (properties)));

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { createTask } from "../../actions";
 import { Form } from "../Form";
 
 export class CreateForm extends React.Component {
@@ -27,11 +28,15 @@ CreateForm.propTypes = {
 const mapStateToProps = state => {
   const {
     startupData: {
-      filterProperties = []
+      formProperties = []
     } = {}
   } = state || {};
 
-  return { properties: filterProperties };
+  return { properties: formProperties };
 };
 
-export default connect(mapStateToProps, undefined)(CreateForm);
+const mapDispatchToProps = dispatch => ({
+  addTask: task => dispatch(createTask(task))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateForm);

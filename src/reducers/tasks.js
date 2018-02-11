@@ -1,4 +1,4 @@
-import { UPDATE_TASKS } from "../actions/actionTypes";
+import { UPDATE_TASKS, ADD_TASK } from "../actions/actionTypes";
 
 const INITIAL_STATE = [];
 
@@ -13,6 +13,12 @@ const tasks = (state = INITIAL_STATE, action) => {
         ...state,
         ...tasks
       ]
+    case ADD_TASK:
+      const {payload: {task = {}} = {}} = action;    
+      return [
+        ...state,
+        task
+      ]        
     default:
       return state;
   }
