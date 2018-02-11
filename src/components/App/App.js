@@ -5,7 +5,7 @@ import { loadProperties, loadTasks } from "../../actions";
 import "./App.css";
 import { getAppSettings, getProperties, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
 import filterFunc from "../../utils/filter";
-import { Table } from "../../components/Table";
+import { TasksTable } from "../../components/TasksTable";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
 import { EditForm } from "../EditForm";
@@ -90,11 +90,7 @@ export class App extends React.Component {
         </Modal>
         <CreateForm addTask={this.addTask} />
         <FilterForm filterChanged={filterObject => this.setState({ filterObject })} />
-        <Table columns={tableColumns}
-          rows={filteredList}
-          editableColumns={["IsComplete"]}
-          hasRemoveAction={true}
-          cellClick={this.handleCellClick.bind(this)}
+        <TasksTable cellClick={this.handleCellClick.bind(this)}
           openItem={this.handleOpenTask.bind(this)} />
       </div>
     );
