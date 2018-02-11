@@ -1,4 +1,4 @@
-import { UPDATE_TASKS, ADD_TASK, EDIT_TASK } from "../actions/actionTypes";
+import { UPDATE_TASKS, ADD_TASK, EDIT_TASK } from "../actions";
 
 const INITIAL_STATE = [];
 

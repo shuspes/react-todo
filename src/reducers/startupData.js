@@ -1,4 +1,4 @@
-import { UPDATE_PROPERTIES } from "../actions/actionTypes";
+import { UPDATE_PROPERTIES } from "../actions";
 
 const INITIAL_STATE = {
   properties: [],
