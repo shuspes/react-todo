@@ -8,3 +8,4 @@ export const loadTasks = tasks.loadTasks;
 export const createTask = tasks.createTask;
 export const changeTask = tasks.changeTask;
 export const openForm = editTaskForm.openForm;
+export const closeForm = editTaskForm.closeForm;

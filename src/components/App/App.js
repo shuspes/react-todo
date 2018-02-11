@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { loadProperties, loadTasks } from "../../actions";
 import "./App.css";
@@ -83,10 +82,7 @@ export class App extends React.Component {
 
     return (
       <div className="css-todoApp">
-        <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} closeIcon={true} >
-          <Modal.Header>Edit Task</Modal.Header>
-          <EditForm task={tasksList.find(it => it.Id === taskId)} />
-        </Modal>
+        <EditForm />
         <CreateForm />
         <FilterForm filterChanged={filterObject => this.setState({ filterObject })} />
         <TasksTable cellClick={this.handleCellClick.bind(this)}

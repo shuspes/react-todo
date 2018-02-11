@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { changeTask } from "../../actions";
+import { changeTask, closeForm as closeFormAction } from "../../actions";
 import { Form } from "../Form";
 
 export class EditForm extends React.Component {
@@ -10,15 +11,20 @@ export class EditForm extends React.Component {
   }
 
   render() {
-    const { properties, buttonName, task = {}, editTask } = this.props;
-    return (
-      <Form shouldDisplayBorder={false}
-        itemValues={task}
-        isDisabled={task.IsComplete}
-        properties={properties}
-        buttonName={buttonName}
-        handleSubmit={editTask} />
-    );
+    const { properties, buttonName, task, editTask, isOpen, closeForm } = this.props;
+    return isOpen && task
+      ? (
+        <Modal open={isOpen} closeOnDimmerClick={true} onClose={closeForm} closeIcon={true} >
+          <Modal.Header>Edit Task</Modal.Header>
+          <Form shouldDisplayBorder={false}
+            itemValues={task}
+            isDisabled={task.IsComplete}
+            properties={properties}
+            buttonName={buttonName}
+            handleSubmit={editTask} />
+        </Modal>
+      )
+      : null;
   };
 };
 
@@ -26,21 +32,31 @@ EditForm.propTypes = {
   properties: PropTypes.array,
   buttonName: PropTypes.string,
   task: PropTypes.object,
-  editTask: PropTypes.func
+  editTask: PropTypes.func,
+  isOpen: PropTypes.bool,
+  closeForm: PropTypes.func
 };
 
 const mapStateToProps = state => {
   const {
     startupData: {
       formProperties = []
-    } = {}
+    } = {},
+    editTaskForm: {
+      isOpen = false,
+      taskId = ""
+    } = {},
+    tasks = []
   } = state || {};
 
-  return { properties: formProperties };
+  const task = isOpen ? tasks.find(it => it.Id === taskId) : null;
+
+  return { properties: formProperties, task, isOpen };
 };
 
 const mapDispatchToProps = dispatch => ({
-  editTask: task => dispatch(changeTask(task.Id, task))
+  editTask: task => dispatch(changeTask(task.Id, task)),
+  closeForm: () => dispatch(closeFormAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditForm);
