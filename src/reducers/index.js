@@ -1,6 +1,7 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 import startupData from "./startupData";
 import tasks from "./tasks";
+import editTaskForm from "./editTaskForm";
 
-const reducers = combineReducers({startupData, tasks});
+const reducers = combineReducers({ startupData, tasks, editTaskForm });
 export default reducers;
