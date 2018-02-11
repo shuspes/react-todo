@@ -85,8 +85,7 @@ export class App extends React.Component {
       <div className="css-todoApp">
         <Modal open={Boolean(taskId)} closeOnDimmerClick={true} onClose={this.handleCloseTask} closeIcon={true} >
           <Modal.Header>Edit Task</Modal.Header>
-          <EditForm task={tasksList.find(it => it.Id === taskId)}
-            editTask={this.editTask.bind(this, taskId)} />
+          <EditForm task={tasksList.find(it => it.Id === taskId)} />
         </Modal>
         <CreateForm />
         <FilterForm filterChanged={filterObject => this.setState({ filterObject })} />
