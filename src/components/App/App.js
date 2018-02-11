@@ -11,25 +11,25 @@ import { EditForm } from "../EditForm";
 import { tasksList } from '../../utils/appData';
 
 export class App extends React.Component {
-  state = {
-    filterFormProp: [],
-    tasksProperties: [],
-    tasksList: [],
-    filterObject: {},
-    taskId: null
-  };
+  // state = {
+  //   filterFormProp: [],
+  //   tasksProperties: [],
+  //   tasksList: [],
+  //   filterObject: {},
+  //   taskId: null
+  // };
 
   componentWillMount() {
     getAppSettings().then(properties => {
-      this.setState({
-        filterFormProp: properties.filterProperties,
-        tasksProperties: properties.tasksProperties
-      });
+      // this.setState({
+      //   filterFormProp: properties.filterProperties,
+      //   tasksProperties: properties.tasksProperties
+      // });
     }).then(getProperties)
       .then(startupData => this.props.loadProperties(startupData))
       .then(getTasks)
       .then(tasksList => {
-        this.setState({ tasksList });
+        // this.setState({ tasksList });
         this.props.loadTasks(tasksList);
       });
   }
@@ -67,24 +67,24 @@ export class App extends React.Component {
     }
   };
 
-  handleOpenTask = taskId => {
-    this.setState({ taskId });
-  };
+  // handleOpenTask = taskId => {
+  //   this.setState({ taskId });
+  // };
 
-  handleCloseTask = () => {
-    this.setState({ taskId: null });
-  };
+  // handleCloseTask = () => {
+  //   this.setState({ taskId: null });
+  // };
 
   render() {
-    const { filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}, taskId } = this.state;
-    const tableColumns = tasksProperties.filter(it => it.ForTable);
-    const filteredList = filterFunc(tasksList, filterFormProp, filterObject);
+    // const { filterFormProp = [], tasksProperties = [], tasksList = [], filterObject = {}, taskId } = this.state;
+    // const tableColumns = tasksProperties.filter(it => it.ForTable);
+    // const filteredList = filterFunc(tasksList, filterFormProp, filterObject);
 
     return (
       <div className="css-todoApp">
         <EditForm />
         <CreateForm />
-        <FilterForm filterChanged={filterObject => this.setState({ filterObject })} />
+        <FilterForm />
         <TasksTable cellClick={this.handleCellClick.bind(this)} />
       </div>
     );

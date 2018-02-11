@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { openForm } from "../../actions";
 import { Table } from "../Table";
+import filterFunc from "../../utils/filter";
 
 export class TasksTable extends React.Component {
   static defaultProps = {
@@ -31,12 +32,14 @@ TasksTable.propTypes = {
 const mapStateToProps = state => {
   const {
     startupData: {
-      tableProperties = []
+      tableProperties = [],
+      filterProperties = []
     } = {},
-    tasks = []
+    tasks = [],
+    filter = {}
   } = state || {};
 
-  return { properties: tableProperties, tasks };
+  return { properties: tableProperties, tasks: filterFunc(tasks, filterProperties, filter) };
 };
 
 const mapDispatchToProps = dispatch => ({

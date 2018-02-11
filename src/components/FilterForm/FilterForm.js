@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { changeFilterValue } from "../../actions";
 import { Form } from "../Form";
 
 export class FilterForm extends React.Component {
@@ -32,4 +33,8 @@ const mapStateToProps = state => {
   return { properties: filterProperties };
 };
 
-export default connect(mapStateToProps, undefined)(FilterForm);
+const mapDispatchToProps = dispatch => ({
+  filterChanged: filterObject => dispatch(changeFilterValue(filterObject))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterForm);

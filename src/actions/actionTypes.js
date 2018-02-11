@@ -4,3 +4,4 @@ export const ADD_TASK = "ADD_TASK";
 export const EDIT_TASK = "EDIT_TASK";
 export const OPEN_EDIT_TASK_FORM = "OPEN_EDIT_TASK_FORM";
 export const CLOSE_EDIT_TASK_FORM = "CLOSE_EDIT_TASK_FORM";
+export const CHANGE_FILTER = "CHANGE_FILTER";
