@@ -10,8 +10,13 @@ export class EditForm extends React.Component {
     buttonName: "Edit"
   }
 
+  handleEditTask = task => {
+    this.props.editTask(task);
+    this.props.closeForm();
+  }
+
   render() {
-    const { properties, buttonName, task, editTask, isOpen, closeForm } = this.props;
+    const { properties, buttonName, task, isOpen, closeForm } = this.props;
     return isOpen && task
       ? (
         <Modal open={isOpen} closeOnDimmerClick={true} onClose={closeForm} closeIcon={true} >
@@ -21,7 +26,7 @@ export class EditForm extends React.Component {
             isDisabled={task.IsComplete}
             properties={properties}
             buttonName={buttonName}
-            handleSubmit={editTask} />
+            handleSubmit={this.handleEditTask} />
         </Modal>
       )
       : null;

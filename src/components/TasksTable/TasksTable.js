@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { openForm } from "../../actions";
 import { Table } from "../Table";
 
 export class TasksTable extends React.Component {
@@ -9,13 +10,13 @@ export class TasksTable extends React.Component {
   };
 
   render() {
-    const {properties, editableColumns, tasks, cellClick, openItem} = this.props;
+    const { properties, editableColumns, tasks, cellClick, openTask } = this.props;
     return <Table columns={properties}
       rows={tasks}
       editableColumns={editableColumns}
       hasRemoveAction={true}
       cellClick={cellClick}
-      openItem={openItem} />
+      openItem={openTask} />
   };
 };
 
@@ -24,7 +25,7 @@ TasksTable.propTypes = {
   editableColumns: PropTypes.array,
   tasks: PropTypes.array,
   cellClick: PropTypes.func,
-  openItem: PropTypes.func
+  openTask: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -38,4 +39,8 @@ const mapStateToProps = state => {
   return { properties: tableProperties, tasks };
 };
 
-export default connect(mapStateToProps, undefined)(TasksTable);
+const mapDispatchToProps = dispatch => ({
+  openTask: taskId => dispatch(openForm(taskId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TasksTable);

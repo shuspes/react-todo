@@ -85,8 +85,7 @@ export class App extends React.Component {
         <EditForm />
         <CreateForm />
         <FilterForm filterChanged={filterObject => this.setState({ filterObject })} />
-        <TasksTable cellClick={this.handleCellClick.bind(this)}
-          openItem={this.handleOpenTask.bind(this)} />
+        <TasksTable cellClick={this.handleCellClick.bind(this)} />
       </div>
     );
   }
