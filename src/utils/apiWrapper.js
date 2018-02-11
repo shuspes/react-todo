@@ -12,7 +12,7 @@ try {
 
 tasksList = Array.isArray(tasksList) ? tasksList : stubTasksList;
 
-const saveTasks = _ => localStorage.setItem(storageTaskListKey, JSON.stringify(tasksList));
+const saveTasks = () => localStorage.setItem(storageTaskListKey, JSON.stringify(tasksList));
 
 export const addTask = task => {
   tasksList.push({...task, Id: createGuid(), IsComplete: false});

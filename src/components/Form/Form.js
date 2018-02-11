@@ -49,7 +49,7 @@ export class Form extends React.Component {
       .map(it => it.ValidateFunc(this.state.changeSet[it.Key]) ? "" : it.ValidationMessage).filter(it => it !== "");
   };
 
-  handlForm = _ => {
+  handlForm = () => {
     const validationMessages = this.validateForm();
     if(validationMessages.length > 0) {
       this.setState({isValid: false, validationMessages});

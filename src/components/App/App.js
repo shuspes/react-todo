@@ -40,7 +40,7 @@ export class App extends React.Component {
   };
 
   editTask = (taskId, task) => {
-    editTask(taskId, task).then(tasksList => this.setState({ tasksList })).then(_ => this.setState({ taskId: null }));
+    editTask(taskId, task).then(tasksList => this.setState({ tasksList })).then(() => this.setState({ taskId: null }));
   };
 
   handleCellClick(taskId, propertyKey, value) {
@@ -72,7 +72,7 @@ export class App extends React.Component {
     this.setState({ taskId });
   };
 
-  handleCloseTask = _ => {
+  handleCloseTask = () => {
     this.setState({ taskId: null });
   };
 
