@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { openForm } from "../../actions";
+import { openForm, changeTask, deleteTask } from "../../actions";
 import { Table } from "../Table";
 import filterFunc from "../../utils/filter";
 
@@ -11,12 +11,13 @@ export class TasksTable extends React.Component {
   };
 
   render() {
-    const { properties, editableColumns, tasks, cellClick, openTask } = this.props;
+    const { properties, editableColumns, tasks, openTask, removeTask, editTask } = this.props;
     return <Table columns={properties}
       rows={tasks}
       editableColumns={editableColumns}
       hasRemoveAction={true}
-      cellClick={cellClick}
+      cellClick={editTask}
+      onRemove={removeTask}
       openItem={openTask} />
   };
 };
@@ -25,8 +26,9 @@ TasksTable.propTypes = {
   properties: PropTypes.array,
   editableColumns: PropTypes.array,
   tasks: PropTypes.array,
-  cellClick: PropTypes.func,
-  openTask: PropTypes.func
+  removeTask: PropTypes.func,
+  openTask: PropTypes.func,
+  editTask: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -43,7 +45,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  openTask: taskId => dispatch(openForm(taskId))
+  openTask: taskId => dispatch(openForm(taskId)),
+  editTask: (taskId, propertyKey, value) => dispatch(changeTask(taskId, { [propertyKey]: value })),  
+  removeTask: taskId => dispatch(deleteTask(taskId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TasksTable);

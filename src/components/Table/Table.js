@@ -21,7 +21,12 @@ export class Table extends React.Component {
   });
 
   handleCellClick = (rowId, propertyKey, value) => {
-    if (this.props.cellClick) this.props.cellClick(rowId, propertyKey, value);
+    const removeProperty = this.getRemoveProperty();
+    if(propertyKey === removeProperty.Key && this.props.onRemove) {
+      this.props.onRemove(rowId);
+    } else if(this.props.cellClick) {
+      this.props.cellClick(rowId, propertyKey, value);
+    }
   };
 
   handleSortClick = propertyKey => {
@@ -60,6 +65,7 @@ Table.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object),
   editableColumns: PropTypes.arrayOf(PropTypes.string),
   hasRemoveAction: PropTypes.bool,
+  onRemove: PropTypes.func,
   cellClick: PropTypes.func,
   openItem: PropTypes.func
 };
