@@ -23,9 +23,6 @@ export const addTask = task => {
 
 export const getProperties = () => new Promise(resolve => setTimeout(resolve, 0, (properties)));
 
-//TODO: remove after rewrite on redux
-export const getAppSettings = () => new Promise(resolve => setTimeout(resolve, 0, ({filterProperties, tasksProperties})));
-
 export const getTasks = () => new Promise(resolve => setTimeout(resolve, 0, tasksList));
 
 export const removeTask = taskId => {
