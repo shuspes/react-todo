@@ -7,7 +7,7 @@ import filterFunc from "../../utils/filter";
 
 export class TasksTable extends React.Component {
   static defaultProps = {
-    editableColumns: ["IsComplete"]
+    editableColumns: ["IsComplete"] //TODO: move to property
   };
 
   render() {
