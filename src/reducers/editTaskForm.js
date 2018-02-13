@@ -6,12 +6,11 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  const { type } = action;
+  const { type, payload: { taskId } = {} } = action;
   if (!type) return state;
 
   switch (type) {
     case OPEN_EDIT_TASK_FORM:
-      const { payload: { taskId } = {} } = action;
       return {
         ...state,
         isOpen: true,

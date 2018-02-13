@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from "react-redux";
 import { loadProperties, loadTasks } from "../../actions";
 import "./App.css";
-import { getProperties, getTasks, addTask, removeTask, editTask } from "../../utils/apiWrapper";
-import filterFunc from "../../utils/filter";
+import { getProperties, getTasks } from "../../utils/apiWrapper";
 import { TasksTable } from "../../components/TasksTable";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
 import { EditForm } from "../EditForm";
-import { tasksList } from '../../utils/appData';
 
 export class App extends React.Component {
   componentWillMount() {

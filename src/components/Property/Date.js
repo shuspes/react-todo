@@ -7,7 +7,7 @@ class Date extends React.Component {
   };
 
   render() {
-    const {className = "", isReadonly = false, property = {}, value = "", isDisabled = false} = this.props;    
+    const {className = "", isReadonly = false, value = "", isDisabled = false} = this.props;    
     return isReadonly
     ? value
     : (
@@ -25,7 +25,6 @@ Date.propTypes = {
   isReadonly: PropTypes.bool,
   value: PropTypes.string,
   className: PropTypes.string,
-  property: PropTypes.object,
   onChange: PropTypes.func,
   isDisabled: PropTypes.bool
 };

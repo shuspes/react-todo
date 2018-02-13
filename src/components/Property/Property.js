@@ -31,7 +31,7 @@ export class Property extends React.Component {
       case "checkbox":
         return <Checkbox isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "date":
-        return <Date isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
+        return <Date isDisabled={isDisabled} onChange={onChangeProperty} className={className} isReadonly={isReadonly} value={value} />
       case "textarea":
         return <Textarea isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
       case "longString":
@@ -42,7 +42,7 @@ export class Property extends React.Component {
         return <DateRange isDisabled={isDisabled} onChange={onChangeProperty} property={property} className={className} isReadonly={isReadonly} value={value} />;        
       default:
         return <String isDisabled={isDisabled} onChange={onChangeProperty} className={className} property={property} isReadonly={isReadonly} value={value} />
-    };
+    }
   };
 };
 

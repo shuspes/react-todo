@@ -1,4 +1,4 @@
-import { filterProperties, tasksProperties, properties, tasksList as stubTasksList, createGuid } from "./appData";
+import { properties, tasksList as stubTasksList, createGuid } from "./appData";
 
 const storageTaskListKey = "tasksList";
 

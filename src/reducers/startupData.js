@@ -8,12 +8,11 @@ const INITIAL_STATE = {
 };
 
 const startupData = (state = INITIAL_STATE, action) => {
-  const { type } = action;
-  if(!type) return state;
+  const { type, payload: properties = [] } = action;
+  if (!type) return state;
 
   switch (type) {
     case UPDATE_PROPERTIES:
-      const {payload: properties = []} = action;
       return {
         ...state,
         ...properties
