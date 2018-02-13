@@ -7,3 +7,4 @@ export const INSERT_TASK = "INSERT_TASK";
 export const OPEN_EDIT_TASK_FORM = "OPEN_EDIT_TASK_FORM";
 export const CLOSE_EDIT_TASK_FORM = "CLOSE_EDIT_TASK_FORM";
 export const CHANGE_FILTER = "CHANGE_FILTER";
+export const HASH_CHANGE = "HASH_CHANGE";

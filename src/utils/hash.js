@@ -1,0 +1,1 @@
+export const getFilterObject = hash => (hash.match(/[#&]filterValue\?(.*?)($|&)/) || [])[1];

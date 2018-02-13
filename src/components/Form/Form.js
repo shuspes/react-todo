@@ -8,16 +8,15 @@ export class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      changeSet: this.getDefultChangeSet(props),
+      changeSet: props.initialSet ? props.initialSet : this.getDefultChangeSet(props),
       isValid: true
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0) {
+    if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0 && !this.props.initialSet) {      
       const newChangeSet = this.getDefultChangeSet(nextProps);
       this.setState({changeSet: newChangeSet});
-      if(this.props.handlePropertyChanged) this.props.handlePropertyChanged(newChangeSet);
     }
   }
 
@@ -37,7 +36,7 @@ export class Form extends React.Component {
     }, {});
   };
 
-  handleChangeProperty = (propertyKey, value) => {    
+  handleChangeProperty = (propertyKey, value) => { 
     const newChangeSet = {...this.state.changeSet, [propertyKey]: value};
     if(this.props.handlePropertyChanged) this.props.handlePropertyChanged(newChangeSet);
     this.setState({changeSet: newChangeSet});
@@ -102,5 +101,6 @@ Form.propTypes ={
   handleSubmit: PropTypes.func,
   handlePropertyChanged: PropTypes.func,
   isDisabled: PropTypes.bool,
-  shouldDisplayBorder: PropTypes.bool
+  shouldDisplayBorder: PropTypes.bool,
+  initialSet: PropTypes.object
 };

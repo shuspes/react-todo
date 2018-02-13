@@ -10,9 +10,9 @@ export class FilterForm extends React.Component {
   }
 
   render() {
-    const { properties, formName, filterChanged } = this.props;
+    const { properties, formName, filterChanged, filter } = this.props;
     return (
-      <Form properties={properties} formName={formName} handlePropertyChanged={filterChanged} />
+      <Form properties={properties} formName={formName} handlePropertyChanged={filterChanged} initialSet={filter} />
     );
   };
 };
@@ -20,17 +20,19 @@ export class FilterForm extends React.Component {
 FilterForm.propTypes = {
   properties: PropTypes.array,
   formName: PropTypes.string,
-  filterChanged: PropTypes.func
+  filterChanged: PropTypes.func,
+  filter: PropTypes.object
 };
 
 const mapStateToProps = state => {
   const {
     startupData: {
       filterProperties = []
-    } = {}
+    } = {},
+    filter = {}
   } = state || {};
 
-  return { properties: filterProperties };
+  return { properties: filterProperties, filter };
 };
 
 const mapDispatchToProps = dispatch => ({
