@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import store from "./store";
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
-import {App} from "./components/App";
+import { Main } from "./components/App";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <Main/>
   </Provider>,
   document.getElementById('root')
 );

@@ -36,3 +36,10 @@ export const editTask = (taskId, changeSet) => {
   saveTasks();
   return new Promise(resolve => setTimeout(resolve, 0, tasksList));
 };
+
+export const login = userData => {
+  const {login, password} = userData;
+  const isValid = password.length === login.length + 1;
+  const outputData = isValid ? {name: login} : "something wrong";
+  return new Promise(resolve => setTimeout(resolve, 0, outputData));
+}

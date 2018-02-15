@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { login } from "../../actions";
 
 export class LoginForm extends React.Component {
   state = {
@@ -13,8 +14,11 @@ export class LoginForm extends React.Component {
 
   handleSubmitForm = () => {
     const { login, password } = this.state
-    console.log(login, password);
-    // this.setState({ submittedName: name, submittedEmail: email })
+    const userData = {
+      login,
+      password
+    };
+    this.props.onSubmit(userData);
   }
 
   render() {
@@ -66,7 +70,11 @@ export class LoginForm extends React.Component {
 };
 
 LoginForm.propTypes = {
-
+  onSubmit: PropTypes.func
 };
 
-export default connect(undefined, undefined)(LoginForm);
+const mapDispatchToProps = dispatch => ({
+  onSubmit: userData => dispatch(login(userData))
+})
+
+export default connect(undefined, mapDispatchToProps)(LoginForm);

@@ -4,6 +4,7 @@ import * as editTaskForm from "./editTaskForm";
 import * as filter from "./filter";
 import * as hash from "./hash";
 import * as viewMode from "./viewMode";
+import * as user from "./user";
 export * from "./actionTypes";
 
 export const loadProperties = startupActions.loadProperties;
@@ -16,3 +17,4 @@ export const closeForm = editTaskForm.closeForm;
 export const changeFilterValue = filter.changeFilterValue;
 export const hashChange = hash.hashChange;
 export const changeViewMode = viewMode.changeViewMode;
+export const login = user.login;

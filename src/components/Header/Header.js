@@ -10,7 +10,7 @@ export class Header extends React.Component {
   }
 
   render() {
-    const { activeMode, modes = [], onLogoutClick } = this.props;
+    const { activeMode, modes = [], onLogoutClick, user } = this.props;
     return (
       <Menu pointing secondary fixed="top" >
         {
@@ -24,7 +24,7 @@ export class Header extends React.Component {
           )
         }
         <Menu.Menu position='right'>
-          <Menu.Item name='username' />
+          <Menu.Item name={user.name} />
           <Menu.Item name='logout' onClick={onLogoutClick} />
         </Menu.Menu>
       </Menu>
@@ -36,17 +36,19 @@ Header.propTypes = {
   activeMode: PropTypes.string,
   modes: PropTypes.array,
   onModeClick: PropTypes.func,
-  onLogoutClick: PropTypes.func
+  onLogoutClick: PropTypes.func,
+  user: PropTypes.object
 };
 
 const mapStateToProps = state => {
   const {
+    user = {},
     viewMode: {
       activeMode,
       modes = []
     } = {}
   } = state || {};
-  return { activeMode, modes };
+  return { activeMode, modes, user };
 };
 
 const mapDispatchToProps = dispatch => ({
