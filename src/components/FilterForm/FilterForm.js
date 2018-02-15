@@ -11,8 +11,9 @@ export class FilterForm extends React.Component {
 
   render() {
     const { properties, formName, filterChanged, filter } = this.props;
+    const initialSet = Object.keys(filter).length > 0 ? filter : null;
     return (
-      <Form properties={properties} formName={formName} handlePropertyChanged={filterChanged} initialSet={filter} />
+      <Form properties={properties} formName={formName} handlePropertyChanged={filterChanged} initialSet={initialSet} />
     );
   };
 };

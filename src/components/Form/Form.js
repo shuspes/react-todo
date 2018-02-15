@@ -17,6 +17,7 @@ export class Form extends React.Component {
     if(Object.keys(this.state.changeSet).length === 0 && nextProps.properties.length > 0 && !this.props.initialSet) {      
       const newChangeSet = this.getDefultChangeSet(nextProps);
       this.setState({changeSet: newChangeSet});
+      if(this.props.handlePropertyChanged) this.props.handlePropertyChanged(newChangeSet);
     }
   }
 
