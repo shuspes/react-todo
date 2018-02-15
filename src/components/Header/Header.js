@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { changeViewMode } from "../../actions";
+import { changeViewMode, removeUser } from "../../actions";
 import { Menu } from 'semantic-ui-react';
 
 export class Header extends React.Component {
@@ -53,7 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onModeClick: viewMode => dispatch(changeViewMode(viewMode)),
-  onLogoutClick: () => { }
+  onLogoutClick: () => dispatch(removeUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

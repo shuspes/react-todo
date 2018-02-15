@@ -18,3 +18,4 @@ export const changeFilterValue = filter.changeFilterValue;
 export const hashChange = hash.hashChange;
 export const changeViewMode = viewMode.changeViewMode;
 export const login = user.login;
+export const removeUser = user.removeUser;

@@ -10,3 +10,4 @@ export const CHANGE_FILTER = "CHANGE_FILTER";
 export const HASH_CHANGE = "HASH_CHANGE";
 export const CHANGE_VIEW_MODE = "CHANGE_VIEW_MODE";
 export const UPDATE_USER = "UPDATE_USER";
+export const REMOVE_USER = "REMOVE_USER";

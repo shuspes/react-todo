@@ -1,5 +1,5 @@
 import { login as apiLogin } from "../utils/apiWrapper";
-import { UPDATE_USER } from "./actionTypes";
+import { UPDATE_USER, REMOVE_USER } from "./actionTypes";
 
 export const login = userData => dispatch => {
   apiLogin(userData)
@@ -20,3 +20,7 @@ const updateUser = user => {
     }
   };
 }
+
+export const removeUser = () => ({
+  type: REMOVE_USER
+});
