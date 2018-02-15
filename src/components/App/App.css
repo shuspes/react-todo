@@ -1,5 +1,18 @@
+body {
+  overflow: hidden;
+}
+#root {
+  height: 100%;
+}
+
 .css-todoApp {
   width: 50%;
-  position: absolute;
+  position: relative;
   left: 25%;
+}
+
+.css-todoApp-container {
+  margin-top: 3em;
+  overflow: auto;
+  height: calc(100% - 3em);
 }

@@ -4,6 +4,7 @@ import tasks from "./tasks";
 import editTaskForm from "./editTaskForm";
 import filter from "./filter";
 import hash from "./hash";
+import viewMode from "./viewMode";
 
-const reducers = combineReducers({ hash, filter, startupData, tasks, editTaskForm });
+const reducers = combineReducers({ hash, filter, viewMode, startupData, tasks, editTaskForm });
 export default reducers;

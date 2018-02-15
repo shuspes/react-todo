@@ -7,6 +7,8 @@ import { TasksTable } from "../../components/TasksTable";
 import { CreateForm } from "../CreateForm";
 import { FilterForm } from "../FilterForm";
 import { EditForm } from "../EditForm";
+import { Header } from "../Header";
+import { Calendar } from "../Calendar";
 
 export class App extends React.Component {
   componentWillMount() {
@@ -20,14 +22,34 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="css-todoApp">
-        <EditForm />
-        <CreateForm />
-        <FilterForm />
-        <TasksTable />
-      </div>
+      <React.Fragment>
+        <Header />  
+        <div className="css-todoApp-container">      
+          <div className="css-todoApp">    
+          {
+            this.props.activeMode === "table"
+            ? (
+              <React.Fragment>
+                <EditForm />
+                <CreateForm />
+                <FilterForm />
+                <TasksTable />
+              </React.Fragment>
+            )
+            : (
+              <Calendar />
+            )
+          }    
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
+};
+
+const mapStateToProps = state => {
+  const {viewMode: {activeMode} = {}} = state;
+  return {activeMode};
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -35,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   loadTasks: tasks => dispatch(loadTasks(tasks))
 });
 
-export default connect(undefined, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
